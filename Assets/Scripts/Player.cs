@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     // PREFAB REFERENCE:
-    [SerializeField] private Rigidbody2D rb;
+    public Rigidbody2D rb; // Read by Item (Mushroom)
     [SerializeField] private PolygonCollider2D col;
 
     // SCENE REFERENCE:
