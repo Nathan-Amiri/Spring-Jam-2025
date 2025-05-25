@@ -16,13 +16,7 @@ public class GroundCheck : MonoBehaviour
         if (col.CompareTag("Terrain"))
         {
             player.isGrounded = false;
-            StartCoroutine(CoyoteTime());
+            player.hasJump = false;
         }
-    }
-    private IEnumerator CoyoteTime()
-    {
-        yield return new WaitForSeconds(player.coyoteTime);
-        player.hasJump = false;
-        // It's safe to remove after a duration no matter what since jump is added every physics frame if the player is grounded
     }
 }

@@ -34,6 +34,11 @@ public class Player : MonoBehaviour
 
     private Coroutine deathWarpRoutine;
 
+    [NonSerialized] public bool facingLeft; // Read by Item
+
+    private bool itemPickupReady;
+    private Item heldItem;
+
     // Set by GroundCheck:
     [NonSerialized] public bool isGrounded;
     [NonSerialized] public Vector2 lastGroundedPosition;
@@ -66,6 +71,24 @@ public class Player : MonoBehaviour
             jumpInputDown = true;
 
         jumpInput = Input.GetButton("Jump");
+
+        if (moveInput > 0)
+            facingLeft = false;
+        else if (moveInput < 0)
+            facingLeft = true;
+
+
+
+        // I know this is a weird way to code this but I think it'll be better at preventing bugs than a more clean method
+        if (Input.GetButtonDown("Item"))
+        {
+            if (heldItem != null)
+                DropItem();
+            else
+                itemPickupReady = true;
+        }
+        if (!Input.GetButton("Item"))
+            itemPickupReady = false;
     }
 
     private void FixedUpdate()
@@ -140,5 +163,21 @@ public class Player : MonoBehaviour
         col.enabled = true;
 
         hasJump = true; // Softlock prevention
+    }
+
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        if (!itemPickupReady || heldItem != null || !col.CompareTag("Item"))
+            return;
+
+        Item item = col.GetComponent<Item>();
+
+        heldItem = item;
+        item.Pickup();
+    }
+    private void DropItem()
+    {
+        heldItem.Drop(this);
+        heldItem = null;
     }
 }

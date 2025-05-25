@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Terrain
   - Hazard
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -14,8 +15,8 @@ TagManager:
   - Water
   - UI
   - 
-  - 
-  - 
+  - Player
+  - PlayerPassThrough
   - 
   - 
   - 
@@ -42,4 +43,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Terrain
+    uniqueID: 1189966561
+    locked: 0
+  - name: Items
+    uniqueID: 1615264017
+    locked: 0
+  - name: Player
+    uniqueID: 3068430867
+    locked: 0
+  - name: Foreground
+    uniqueID: 3558643135
     locked: 0
