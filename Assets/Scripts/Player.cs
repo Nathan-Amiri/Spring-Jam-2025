@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     // PREFAB REFERENCE:
     public Rigidbody2D rb; // Read by Item (Mushroom)
-    [SerializeField] private PolygonCollider2D col;
+    [SerializeField] private PolygonCollider2D myCol;
 
     // SCENE REFERENCE:
     [SerializeField] private Camera mainCamera;
@@ -36,7 +36,8 @@ public class Player : MonoBehaviour
 
     [NonSerialized] public bool facingLeft; // Read by Item
 
-    private bool itemPickupReady;
+    private readonly List<Item> itemsInPickupRange = new();
+    private bool itemPickupInput;
     private Item heldItem;
 
     private bool dynamicJumpOff;
@@ -51,7 +52,7 @@ public class Player : MonoBehaviour
         if (deathWarpRoutine != null)
         {
             StopCoroutine(deathWarpRoutine);
-            col.enabled = true;
+            myCol.enabled = true;
         }
     }
     private void Update()
@@ -64,8 +65,14 @@ public class Player : MonoBehaviour
         if (rb.velocity.y <= 0)
             dynamicJumpOff = false;
 
+
+
         if (isStunned)
             return;
+
+
+
+        PickupItem();
 
         if (isGrounded)
             lastGroundedPosition = transform.position;
@@ -90,10 +97,10 @@ public class Player : MonoBehaviour
             if (heldItem != null)
                 DropItem();
             else
-                itemPickupReady = true;
+                itemPickupInput = true;
         }
         if (!Input.GetButton("Item"))
-            itemPickupReady = false;
+            itemPickupInput = false;
     }
 
     private void FixedUpdate()
@@ -147,7 +154,7 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        col.enabled = false;
+        myCol.enabled = false;
 
         deathWarpRoutine = StartCoroutine(DeathWarp(deathWarpDuration));
 
@@ -165,20 +172,62 @@ public class Player : MonoBehaviour
 
         isStunned = false;
 
-        col.enabled = true;
+        myCol.enabled = true;
 
         hasJump = true; // Softlock prevention
     }
 
-    private void OnTriggerStay2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (!itemPickupReady || heldItem != null || !col.CompareTag("Item"))
+        // 1. Add item if it's in range
+        if (col.CompareTag("Item"))
+            itemsInPickupRange.Add(col.GetComponent<Item>());
+    }
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        // 2. Remove item if it leaves range and turn off its icon
+        if (col.CompareTag("Item"))
+        {
+            Item itemInRange = col.GetComponent<Item>();
+            itemInRange.TogglePickupIcon(false);
+            itemsInPickupRange.Remove(itemInRange);
+        }
+    }
+    private void PickupItem() // Run in Update
+    {
+        if (itemsInPickupRange.Count == 0)
             return;
 
-        Item item = col.GetComponent<Item>();
+        Item closestItemInRange = null;
 
-        heldItem = item;
-        item.Pickup();
+        // 3. Turn on icon for the closest item in range and turn off icon for any other items in range
+        if (itemsInPickupRange.Count == 1)
+            closestItemInRange = itemsInPickupRange[0];
+        else
+        {
+            float distanceToClosestItem = 999;
+            foreach (Item item in itemsInPickupRange)
+            {
+                Vector2 closestPointInItemColliderBounds = item.triggerCol.bounds.ClosestPoint(transform.position);
+                float distanceToItem = Vector2.Distance(closestPointInItemColliderBounds, transform.position);
+
+                if (distanceToItem < distanceToClosestItem)
+                {
+                    closestItemInRange = item;
+                    distanceToClosestItem = distanceToItem;
+                }
+            }
+        }
+
+        foreach (Item item in itemsInPickupRange)
+            item.TogglePickupIcon(item == closestItemInRange);
+
+        // 4. Pick up closest item if input and not holding item
+        if (!itemPickupInput || heldItem != null)
+            return;
+
+        heldItem = closestItemInRange;
+        closestItemInRange.Pickup();
     }
     private void DropItem()
     {

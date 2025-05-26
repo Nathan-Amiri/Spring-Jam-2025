@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6443120910450712982}
-  col: {fileID: 7839618245749166024}
+  myCol: {fileID: 7839618245749166024}
   mainCamera: {fileID: 0}
 --- !u!50 &6443120910450712982
 Rigidbody2D:

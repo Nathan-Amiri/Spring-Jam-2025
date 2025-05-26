@@ -7,7 +7,10 @@ public class Item : MonoBehaviour
     // PREFAB REFERENCE:
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private List<Collider2D> cols;
+    [SerializeField] private List<Collider2D> myCols; // All colliders, including trigger collider. Used only by Item
+    public Collider2D triggerCol; // Just trigger collider. Used only by Player
+
+    [SerializeField] private SpriteRenderer pickupIconSR;
 
     [SerializeField] private string itemName;
 
@@ -15,7 +18,7 @@ public class Item : MonoBehaviour
     private RigidbodyConstraints2D defaultConstraints;
 
     // Items are set uninteractable on pickup, since colliders won't turn off in time to prevent some interactions (e.g. falling onto mushroom)
-    public bool uninteractable;
+    private bool uninteractable;
 
     private void Awake()
     {
@@ -46,7 +49,7 @@ public class Item : MonoBehaviour
     {
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         sr.enabled = false;
-        foreach (Collider2D col in cols)
+        foreach (Collider2D col in myCols)
             col.enabled = false;
 
         uninteractable = true;
@@ -56,7 +59,7 @@ public class Item : MonoBehaviour
     {
         rb.constraints = defaultConstraints;
         sr.enabled = true;
-        foreach (Collider2D col in cols)
+        foreach (Collider2D col in myCols)
             col.enabled = true;
 
         int xDirection = player.facingLeft ? -1 : 1;
@@ -68,6 +71,11 @@ public class Item : MonoBehaviour
                 break;
         }
 
-        uninteractable = true;
+        uninteractable = false;
+    }
+
+    public void TogglePickupIcon(bool on)
+    {
+        pickupIconSR.enabled = on;
     }
 }
