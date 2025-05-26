@@ -12,7 +12,10 @@ public class Item : MonoBehaviour
     [SerializeField] private string itemName;
 
     // DYNAMIC:
-    RigidbodyConstraints2D defaultConstraints;
+    private RigidbodyConstraints2D defaultConstraints;
+
+    // Items are set uninteractable on pickup, since colliders won't turn off in time to prevent some interactions (e.g. falling onto mushroom)
+    public bool uninteractable;
 
     private void Awake()
     {
@@ -21,7 +24,7 @@ public class Item : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D playerCol)
     {
-        if (!playerCol.CompareTag("Player"))
+        if (uninteractable || !playerCol.CompareTag("Player"))
             return;
 
         Player player = playerCol.GetComponent<Player>();
@@ -34,6 +37,7 @@ public class Item : MonoBehaviour
 
                 // Set velocity instead of adding force so that current fall speed doesn't affect bounce height
                 player.rb.velocity = new(player.rb.velocity.x, 45);
+                player.TurnOffDynamicJump();
                 break;
         }
     }
@@ -44,6 +48,8 @@ public class Item : MonoBehaviour
         sr.enabled = false;
         foreach (Collider2D col in cols)
             col.enabled = false;
+
+        uninteractable = true;
     }
 
     public void Drop(Player player)
@@ -61,5 +67,7 @@ public class Item : MonoBehaviour
                 transform.position = player.transform.position + new Vector3(.5f * xDirection, 0);
                 break;
         }
+
+        uninteractable = true;
     }
 }

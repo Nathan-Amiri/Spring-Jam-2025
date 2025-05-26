@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
     private bool itemPickupReady;
     private Item heldItem;
 
+    private bool dynamicJumpOff;
+
     // Set by GroundCheck:
     [NonSerialized] public bool isGrounded;
     [NonSerialized] public Vector2 lastGroundedPosition;
@@ -58,6 +60,9 @@ public class Player : MonoBehaviour
 
         if (transform.position.y < deathY)
             Die();
+
+        if (rb.velocity.y <= 0)
+            dynamicJumpOff = false;
 
         if (isStunned)
             return;
@@ -109,8 +114,8 @@ public class Player : MonoBehaviour
         if (rb.velocity.y < 0)
             // Subtract fall and lowjump multipliers by 1 to more accurately represent the multiplier (fallmultiplier = 2 means fastfall will be x2)
             rb.velocity += (fallMultiplier - 1) * Physics2D.gravity.y * Time.deltaTime * Vector2.up;
-        // Dynamic jump
-        else if (rb.velocity.y > 0 && !jumpInput)
+        // Dynamic jump (see TurnOffDynamicJump for more info)
+        else if (rb.velocity.y > 0 && (!jumpInput || dynamicJumpOff))
             rb.velocity += (lowJumpMultiplier - 1) * Physics2D.gravity.y * Time.deltaTime * Vector2.up;
 
         if (isGrounded)
@@ -179,5 +184,13 @@ public class Player : MonoBehaviour
     {
         heldItem.Drop(this);
         heldItem = null;
+    }
+
+    public void TurnOffDynamicJump()
+    {
+        // Called by Items that provide an upward boost that shouldn't be affected by dynamic jump
+        // While dynamic jump is off, player is permanently weighty as if the jump button wasn't held
+        // Turns back on once the player is no longer moving upwards
+        dynamicJumpOff = true;
     }
 }
