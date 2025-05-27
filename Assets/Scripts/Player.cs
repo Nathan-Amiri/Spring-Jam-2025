@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
 
     private readonly float deathY = -50; // Needs to be a value below the map, to prevent softlocks in case the player manages to get out of bounds
 
+    private readonly float spinachMaxFallSpeed = 3;
+
     // DYNAMIC:
     private float moveInput;
     private bool jumpInputDown;
@@ -107,6 +109,13 @@ public class Player : MonoBehaviour
         if (isStunned)
             return;
 
+        if (heldItem != null && heldItem.itemName == "Spinach" && rb.velocity.y < 0)
+        {
+            float ySpeed = rb.velocity.y;
+            ySpeed = Mathf.Clamp(ySpeed, -spinachMaxFallSpeed, 0);
+            rb.velocity = new Vector2(rb.velocity.x, ySpeed);
+        }
+
         // Snappy horizontal movement:
         // (This movement method will prevent the player from slowing completely in a frictionless environment. To prevent this,
         // this rigidbody's linear drag is set to .01)
@@ -172,9 +181,6 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Hazard"))
-            Die();
-
         // 1. Add item if it's in range
         if (col.TryGetComponent(out Item itemInRange))
             itemsInPickupRange.Add(itemInRange);

@@ -12,7 +12,7 @@ public class Item : MonoBehaviour
 
     [SerializeField] private SpriteRenderer pickupIconSR;
 
-    [SerializeField] private string itemName;
+    public string itemName; // Read by Player
 
     // CONSTANT:
     private readonly float mushroomBounceStrength = 45;
@@ -95,6 +95,10 @@ public class Item : MonoBehaviour
             case "Celery":
                 transform.position = player.transform.position + new Vector3(1 * xDirection, 4.5f);
                 transform.rotation = Quaternion.Euler(0, facingLeft ? 180 : 0, 85);
+                break;
+
+            case "Spinach":
+                transform.position = player.transform.position + new Vector3(0, 1);
                 break;
 
             default:
