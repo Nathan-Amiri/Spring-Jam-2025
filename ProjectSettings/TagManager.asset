@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Terrain
   - Hazard
-  - Item
+  - ItemTerrain
   layers:
   - Default
   - TransparentFX
@@ -53,6 +53,6 @@ TagManager:
   - name: Player
     uniqueID: 3068430867
     locked: 0
-  - name: Foreground
-    uniqueID: 3558643135
+  - name: InteractIcons
+    uniqueID: 890661645
     locked: 0

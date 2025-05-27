@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
 
     private Coroutine deathWarpRoutine;
 
-    [NonSerialized] public bool facingLeft; // Read by Item
+    private bool facingLeft; // Read by Item
 
     private readonly List<Item> itemsInPickupRange = new();
     private bool itemPickupInput;
@@ -179,16 +179,18 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.CompareTag("Hazard"))
+            Die();
+
         // 1. Add item if it's in range
-        if (col.CompareTag("Item"))
-            itemsInPickupRange.Add(col.GetComponent<Item>());
+        if (col.TryGetComponent(out Item itemInRange))
+            itemsInPickupRange.Add(itemInRange);
     }
     private void OnTriggerExit2D(Collider2D col)
     {
         // 2. Remove item if it leaves range and turn off its icon
-        if (col.CompareTag("Item"))
+        if (col.TryGetComponent(out Item itemInRange))
         {
-            Item itemInRange = col.GetComponent<Item>();
             itemInRange.TogglePickupIcon(false);
             itemsInPickupRange.Remove(itemInRange);
         }
@@ -231,7 +233,7 @@ public class Player : MonoBehaviour
     }
     private void DropItem()
     {
-        heldItem.Drop(this);
+        heldItem.Drop(this, facingLeft);
         heldItem = null;
     }
 

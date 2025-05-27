@@ -14,6 +14,11 @@ public class Item : MonoBehaviour
 
     [SerializeField] private string itemName;
 
+    // CONSTANT:
+    private readonly float mushroomBounceStrength = 45;
+    private readonly float mushroomCookieBounceStrength = 15;
+    private readonly float cookieThrowSpeed = 8;
+
     // DYNAMIC:
     private RigidbodyConstraints2D defaultConstraints;
 
@@ -25,12 +30,19 @@ public class Item : MonoBehaviour
         defaultConstraints = rb.constraints;
     }
 
-    private void OnTriggerEnter2D(Collider2D playerCol)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (uninteractable || !playerCol.CompareTag("Player"))
+        // Mushroom bounce cookie/broccoli
+        if (col.gameObject.name == "Broccoli" || col.gameObject.name == "Cookie")
+            if (itemName == "Mushroom" && col.transform.position.y > transform.position.y + .5f)
+                col.attachedRigidbody.velocity = new(col.attachedRigidbody.velocity.x, mushroomCookieBounceStrength);
+
+
+
+        if (uninteractable || !col.CompareTag("Player"))
             return;
 
-        Player player = playerCol.GetComponent<Player>();
+        Player player = col.GetComponent<Player>();
 
         switch (itemName)
         {
@@ -39,7 +51,7 @@ public class Item : MonoBehaviour
                     break;
 
                 // Set velocity instead of adding force so that current fall speed doesn't affect bounce height
-                player.rb.velocity = new(player.rb.velocity.x, 45);
+                player.rb.velocity = new(player.rb.velocity.x, mushroomBounceStrength);
                 player.TurnOffDynamicJump();
                 break;
         }
@@ -55,17 +67,26 @@ public class Item : MonoBehaviour
         uninteractable = true;
     }
 
-    public void Drop(Player player)
+    public void Drop(Player player, bool facingLeft)
     {
         rb.constraints = defaultConstraints;
         sr.enabled = true;
         foreach (Collider2D col in myCols)
             col.enabled = true;
 
-        int xDirection = player.facingLeft ? -1 : 1;
+        int xDirection = facingLeft ? -1 : 1;
 
         switch (itemName)
         {
+            case "Cookie":
+                transform.position = player.transform.position + new Vector3(.5f * xDirection, 0);
+                rb.velocity = new Vector2(xDirection * cookieThrowSpeed, 0);
+                break;
+
+            case "Broccoli":
+                transform.position = player.transform.position + new Vector3(.5f * xDirection, 2);
+                break;
+
             default:
                 transform.position = player.transform.position + new Vector3(.5f * xDirection, 0);
                 break;

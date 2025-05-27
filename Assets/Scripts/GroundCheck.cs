@@ -10,6 +10,8 @@ public class GroundCheck : MonoBehaviour
     {
         if (col.CompareTag("Terrain"))
             player.isGrounded = true;
+        else if (col.CompareTag("ItemTerrain"))
+            player.hasJump = true; // Don't set player to isGrounded because items don't set deathwarp position!
     }
     private void OnTriggerExit2D(Collider2D col)
     {
