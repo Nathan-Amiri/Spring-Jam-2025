@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
     private readonly float jumpForce = 15;
     private readonly float fallMultiplier = 3; // Fastfall
     private readonly float lowJumpMultiplier = 10; // Dynamic jump
-    private readonly float jumpBuffer = .08f;
     [NonSerialized] public readonly float coyoteTime = .1f; // Read by GroundCheck
 
     private readonly float deathWarpDuration = .15f;
@@ -131,7 +130,7 @@ public class Player : MonoBehaviour
         if (jumpInputDown)
         {
             if (!hasJump)
-                StartCoroutine(JumpBuffer());
+                jumpInputDown = false;
             else
             {
                 jumpInputDown = false;
@@ -144,12 +143,6 @@ public class Player : MonoBehaviour
     private void LateUpdate()
     {
         mainCamera.transform.position = new(transform.position.x, transform.position.y, -10);
-    }
-
-    private IEnumerator JumpBuffer()
-    {
-        yield return new WaitForSeconds(jumpBuffer);
-        jumpInputDown = false;
     }
 
     public void Die()

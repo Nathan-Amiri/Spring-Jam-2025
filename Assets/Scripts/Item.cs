@@ -17,6 +17,7 @@ public class Item : MonoBehaviour
     // CONSTANT:
     private readonly float mushroomBounceStrength = 45;
     private readonly float mushroomCookieBounceStrength = 15;
+    private readonly float mushroomCeleryBounceStrength = 30;
     private readonly float cookieThrowSpeed = 8;
 
     // DYNAMIC:
@@ -37,8 +38,6 @@ public class Item : MonoBehaviour
             if (itemName == "Mushroom" && col.transform.position.y > transform.position.y + .5f)
                 col.attachedRigidbody.velocity = new(col.attachedRigidbody.velocity.x, mushroomCookieBounceStrength);
 
-
-
         if (uninteractable || !col.CompareTag("Player"))
             return;
 
@@ -55,6 +54,12 @@ public class Item : MonoBehaviour
                 player.TurnOffDynamicJump();
                 break;
         }
+    }
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        // Mushroom bounce celery
+        if (col.transform.parent != null && col.transform.parent.name == "Celery" && itemName == "Mushroom")
+            col.attachedRigidbody.AddForceAtPosition(Vector2.up * mushroomCeleryBounceStrength, transform.position + new Vector3(0, .5f), ForceMode2D.Impulse);
     }
 
     public void Pickup()
@@ -85,6 +90,11 @@ public class Item : MonoBehaviour
 
             case "Broccoli":
                 transform.position = player.transform.position + new Vector3(.5f * xDirection, 2);
+                break;
+
+            case "Celery":
+                transform.position = player.transform.position + new Vector3(1 * xDirection, 4.5f);
+                transform.rotation = Quaternion.Euler(0, facingLeft ? 180 : 0, 85);
                 break;
 
             default:
