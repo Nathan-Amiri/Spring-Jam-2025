@@ -321,6 +321,7 @@ MonoBehaviour:
   - {fileID: -7525461947522025920}
   - {fileID: 4204076472379459481}
   triggerCol: {fileID: 4204076472379459481}
+  pickupCol: {fileID: 4204076472379459481}
   pickupIconSR: {fileID: 3971920125342645574}
   itemName: Mushroom
 --- !u!50 &-3615031215732231382

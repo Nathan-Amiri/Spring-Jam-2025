@@ -406,6 +406,7 @@ MonoBehaviour:
   - {fileID: 2222314081689814403}
   - {fileID: 1563958227207353898}
   triggerCol: {fileID: 1563958227207353898}
+  pickupCol: {fileID: 1563958227207353898}
   pickupIconSR: {fileID: 6643880220444631644}
   itemName: Celery
 --- !u!50 &6132265602239499632

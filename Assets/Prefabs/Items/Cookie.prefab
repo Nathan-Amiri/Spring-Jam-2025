@@ -227,6 +227,7 @@ MonoBehaviour:
   - {fileID: 2857836568474248457}
   - {fileID: 2274804672063070714}
   triggerCol: {fileID: 2274804672063070714}
+  pickupCol: {fileID: 2274804672063070714}
   pickupIconSR: {fileID: 9013352105799102785}
   itemName: Cookie
 --- !u!50 &6384240184269940176

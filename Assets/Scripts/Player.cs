@@ -209,7 +209,7 @@ public class Player : MonoBehaviour
             float distanceToClosestItem = 999;
             foreach (Item item in itemsInPickupRange)
             {
-                Vector2 closestPointInItemColliderBounds = item.triggerCol.bounds.ClosestPoint(transform.position);
+                Vector2 closestPointInItemColliderBounds = item.pickupCol.bounds.ClosestPoint(transform.position);
                 float distanceToItem = Vector2.Distance(closestPointInItemColliderBounds, transform.position);
 
                 if (distanceToItem < distanceToClosestItem)
