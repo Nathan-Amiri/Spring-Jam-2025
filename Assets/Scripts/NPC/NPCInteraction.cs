@@ -18,7 +18,7 @@ public class NPCInteraction : MonoBehaviour
             {
                 Debug.Log("Start dialogue");
 
-                Vector3 spawnPos = transform.position + Vector3.up * 2f;
+                Vector3 spawnPos = transform.position + Vector3.up * 3f;
                 activeBubble = Instantiate(speechBubblePrefab, spawnPos, Quaternion.identity);
                 activeBubble.transform.SetParent(transform);
 

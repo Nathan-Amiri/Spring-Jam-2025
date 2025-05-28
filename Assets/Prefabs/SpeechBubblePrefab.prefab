@@ -86,7 +86,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &3191138060741209612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,14 +214,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textUI: {fileID: 1631939034926273795}
   blipSounds:
-  - {fileID: 8300000, guid: 87ebcdebd33c65148b600da6ba0e71b3, type: 3}
-  - {fileID: 8300000, guid: 00635a6c07f2de543a36ca4c187056ec, type: 3}
-  - {fileID: 8300000, guid: a0a146f116c95fd4da3c4d350a7270cb, type: 3}
-  - {fileID: 8300000, guid: 64c6dd29f976c914b8f9d4c5485d6f65, type: 3}
-  - {fileID: 8300000, guid: 11a415499f734484f8682e0e4c73756b, type: 3}
-  - {fileID: 8300000, guid: b37a92917ffd2824bb1e1b6d47a0a239, type: 3}
-  - {fileID: 8300000, guid: 1daa6457d9c68c84bb59757f2a589c6d, type: 3}
-  typingSpeed: 0.1
+  - {fileID: 8300000, guid: 08e7d9784747fc34c8252dc94ec90a1e, type: 3}
+  - {fileID: 8300000, guid: 48434ddf89d1c0740bf344826fc73c44, type: 3}
+  - {fileID: 8300000, guid: ffafa900eef28544e8641193da880d3f, type: 3}
+  - {fileID: 8300000, guid: 42ffcc3961267ab4a8878290120bdb9d, type: 3}
+  - {fileID: 8300000, guid: 53b8aef7797dbe345b0475f005b101b1, type: 3}
+  - {fileID: 8300000, guid: 3c198e5b71c249842a1720d9c322b7bf, type: 3}
+  - {fileID: 8300000, guid: b61d318f0f661e44a9a1b297c52a4cce, type: 3}
+  typingSpeed: 0.04
 --- !u!1 &3231205479058399195
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,8 +314,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -70, y: -50, z: -70, w: -50}
+  m_margin: {x: -70.002045, y: -50, z: -55.982254, w: -50}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -383,8 +383,8 @@ RectTransform:
   m_GameObject: {fileID: 3758196863499637156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2956044810497202995}
   m_Father: {fileID: 8342359216453242944}
