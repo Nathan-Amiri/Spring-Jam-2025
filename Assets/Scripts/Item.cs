@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Item : MonoBehaviour
 {
     // PREFAB REFERENCE:
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private List<Collider2D> myCols; // All colliders, including pickup collider. Used only by Item
-    public Collider2D pickupCol; // Just the pickup collider. Used only by Player
+    [SerializeField] private List<Collider2D> myCols; // All colliders. Used only by Item
+    public Collider2D closestCollider; // The collider used to determine which item is closest to Player. Used only by Player
+    public List<Collider2D> noClipColliders; // The non-trigger colliders that can noclip through walls/hazards. Used only by Can
 
     [SerializeField] private SpriteRenderer pickupIconSR;
 
@@ -144,6 +146,10 @@ public class Item : MonoBehaviour
                 rb.velocity = new Vector2(xDirection * cornDogThrowSpeed, 0);
                 break;
 
+            case "Can":
+                transform.position = player.transform.position + new Vector3(2 * xDirection, .75f);
+                break;
+
             default:
                 transform.position = player.transform.position + new Vector3(.5f * xDirection, 0);
                 break;
@@ -155,5 +161,40 @@ public class Item : MonoBehaviour
     public void TogglePickupIcon(bool on)
     {
         pickupIconSR.enabled = on;
+    }
+
+    public void OnEnterCanSecondTrigger(Collider2D col, bool enter) // Only the Can will run this method
+    {
+        // The easiest way to handle multiple triggers on a single rigidbody is to have a second script that can only detect one trigger
+        // This method is called whenever a collider enters the Can's NoClip trigger
+
+        List<Collider2D> cols = new();
+
+        if (col.TryGetComponent(out Player _))
+        {
+            cols.Add(col);
+        }
+        else if (col.TryGetComponent(out Item item))
+        {
+            cols = item.noClipColliders;
+        }
+        else
+            return;
+
+        if (cols.Count == 0) // Not all items have noClipColliders (not all can pass through can)
+            return;
+
+        int layer1 = LayerMask.NameToLayer("NoClipable");
+        // HazardCollision layer acts like both NoClipable and PlayerPassThrough (works with can but doesn't normally collide with player)
+        int layer2 = LayerMask.NameToLayer("HazardCollision");
+        LayerMask mask = (1 << layer1) | (1 << layer2);
+
+        foreach (Collider2D c in cols)
+        {
+            if (enter)
+                c.excludeLayers = mask;
+            else
+                c.excludeLayers = default;
+        }
     }
 }

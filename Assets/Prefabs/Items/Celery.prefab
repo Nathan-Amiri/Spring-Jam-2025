@@ -405,7 +405,8 @@ MonoBehaviour:
   myCols:
   - {fileID: 2222314081689814403}
   - {fileID: 1563958227207353898}
-  pickupCol: {fileID: 1563958227207353898}
+  closestCollider: {fileID: 2222314081689814403}
+  noClipCollider: {fileID: 0}
   pickupIconSR: {fileID: 6643880220444631644}
   cornDogJoint: {fileID: 0}
   itemName: Celery

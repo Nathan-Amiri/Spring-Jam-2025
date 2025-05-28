@@ -237,7 +237,8 @@ MonoBehaviour:
   myCols:
   - {fileID: 471348361650659105}
   - {fileID: 3146737783529199248}
-  pickupCol: {fileID: 471348361650659105}
+  closestCollider: {fileID: 471348361650659105}
+  noClipCollider: {fileID: 0}
   pickupIconSR: {fileID: 1394772226810495218}
   cornDogJoint: {fileID: 0}
   itemName: Broccoli

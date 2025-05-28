@@ -106,7 +106,8 @@ MonoBehaviour:
   myCols:
   - {fileID: 7930278146948834395}
   - {fileID: 1518563651820469361}
-  pickupCol: {fileID: 7930278146948834395}
+  closestCollider: {fileID: 7930278146948834395}
+  noClipCollider: {fileID: 0}
   pickupIconSR: {fileID: 1354509319672447281}
   cornDogJoint: {fileID: 0}
   itemName: Spinach

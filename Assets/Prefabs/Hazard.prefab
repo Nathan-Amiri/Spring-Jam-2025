@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6208872833429630087}
   - component: {fileID: 6352538506979660050}
   - component: {fileID: 7956305249770955110}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 8232986930277216790}
   - component: {fileID: 7227161189182284371}
   - component: {fileID: 4337056872691603260}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hazard
   m_TagString: Hazard
   m_Icon: {fileID: 0}

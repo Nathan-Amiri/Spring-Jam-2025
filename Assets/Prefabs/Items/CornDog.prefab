@@ -276,7 +276,10 @@ MonoBehaviour:
   myCols:
   - {fileID: 48466877842569322}
   - {fileID: 4467740019415977616}
-  pickupCol: {fileID: 48466877842569322}
+  closestCollider: {fileID: 48466877842569322}
+  noClipColliders:
+  - {fileID: 48466877842569322}
+  - {fileID: 4467740019415977616}
   pickupIconSR: {fileID: 6045729857271955318}
   cornDogJoint: {fileID: 1944107177854699608}
   itemName: Corn Dog
