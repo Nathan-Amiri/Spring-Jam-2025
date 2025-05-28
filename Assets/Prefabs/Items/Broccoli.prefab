@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 471348361650659105}
   m_Layer: 8
   m_Name: Broccoli
-  m_TagString: Untagged
+  m_TagString: ItemTerrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -237,9 +237,9 @@ MonoBehaviour:
   myCols:
   - {fileID: 471348361650659105}
   - {fileID: 3146737783529199248}
-  triggerCol: {fileID: 471348361650659105}
   pickupCol: {fileID: 471348361650659105}
   pickupIconSR: {fileID: 1394772226810495218}
+  cornDogJoint: {fileID: 0}
   itemName: Broccoli
 --- !u!50 &9133934959265246302
 Rigidbody2D:
