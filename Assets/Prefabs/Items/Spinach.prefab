@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7930278146948834395}
   m_Layer: 0
   m_Name: Spinach
-  m_TagString: ItemTerrain
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ MonoBehaviour:
   - {fileID: 7930278146948834395}
   - {fileID: 1518563651820469361}
   closestCollider: {fileID: 7930278146948834395}
-  noClipCollider: {fileID: 0}
+  noClipColliders: []
   pickupIconSR: {fileID: 1354509319672447281}
   cornDogJoint: {fileID: 0}
   itemName: Spinach

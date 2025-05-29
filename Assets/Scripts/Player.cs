@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -58,6 +60,8 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        SpaghettiUpdate();
+
         rb.gravityScale = isStunned ? 0 : gravityScale;
 
         if (transform.position.y < deathY)
@@ -72,8 +76,6 @@ public class Player : MonoBehaviour
             return;
 
 
-
-        PickupItem();
 
         if (isGrounded)
             lastGroundedPosition = transform.position;
@@ -90,7 +92,7 @@ public class Player : MonoBehaviour
         else if (moveInput < 0)
             facingLeft = true;
 
-
+        PickupItemUpdate();
 
         // I know this is a weird way to code this but I think it'll be better at preventing bugs than a more clean method
         if (Input.GetButtonDown("Item"))
@@ -106,6 +108,8 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        SpaghettiFixedUpdate();
+
         if (isStunned)
             return;
 
@@ -132,9 +136,6 @@ public class Player : MonoBehaviour
         // Dynamic jump (see TurnOffDynamicJump for more info)
         else if (rb.velocity.y > 0 && (!jumpInput || dynamicJumpOff))
             rb.velocity += (lowJumpMultiplier - 1) * Physics2D.gravity.y * Time.deltaTime * Vector2.up;
-
-        if (isGrounded)
-            hasJump = true;
 
         if (jumpInputDown)
         {
@@ -164,6 +165,8 @@ public class Player : MonoBehaviour
 
         float warpSpeed = Vector2.Distance(lastGroundedPosition, transform.position) / deathWarpDuration;
         rb.velocity = warpSpeed * ((Vector3)lastGroundedPosition - transform.position).normalized;
+
+        DestroyTether();
     }
     private IEnumerator DeathWarp(float duration)
     {
@@ -194,7 +197,7 @@ public class Player : MonoBehaviour
             itemsInPickupRange.Remove(itemInRange);
         }
     }
-    private void PickupItem() // Run in Update
+    private void PickupItemUpdate() // Run in Update
     {
         if (itemsInPickupRange.Count == 0)
             return;
@@ -242,5 +245,137 @@ public class Player : MonoBehaviour
         // While dynamic jump is off, player is permanently weighty as if the jump button wasn't held
         // Turns back on once the player is no longer moving upwards
         dynamicJumpOff = true;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    [SerializeField] private LineRenderer tetherRenderer;
+    [SerializeField] private Rigidbody2D anchorRB;
+    [SerializeField] private FixedJoint2D anchorFixedJoint;
+
+    private readonly Vector2 aimDirection = new(1, 1);
+    private Vector2 failAimDirection;
+    private Vector2 tetherHitPoint;
+    private DistanceJoint2D tetherJoint;
+
+    private readonly float maxTetherLength = 7;
+    private readonly float tetherSwingSpeed = 18;
+
+    private bool spaghettiFailed;
+
+    private void ActivateSpaghetti()
+    {
+        if (spaghettiFailed)
+            return;
+
+        Vector2 newAimDirection = facingLeft ? aimDirection * new Vector2(-1, 1) : aimDirection;
+        newAimDirection.Normalize();
+
+        int layers = LayerMask.GetMask("NoClipable", "Tetherable"); // NoClipable is just Terrain and Hazard
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, newAimDirection, maxTetherLength, layers);
+
+        if (hit.collider == null)
+        {
+            StartCoroutine(SpaghettiFail(newAimDirection));
+            return;
+        }
+
+        ToggleTether(true, hit.point);
+
+        anchorRB.position = hit.point;
+        anchorFixedJoint.enabled = true;
+        anchorFixedJoint.connectedBody = hit.rigidbody;
+
+        tetherJoint = gameObject.AddComponent<DistanceJoint2D>();
+        tetherJoint.connectedBody = anchorRB;
+
+        isStunned = true;
+        rb.velocity = (facingLeft ? Vector2.left : Vector2.right) * tetherSwingSpeed;
+    }
+
+    private IEnumerator SpaghettiFail(Vector2 aimDirection)
+    {
+        spaghettiFailed = true;
+
+        tetherRenderer.enabled = true;
+        failAimDirection = aimDirection;
+
+        yield return new WaitForSeconds(.3f);
+
+        failAimDirection = default;
+        tetherRenderer.enabled = false;
+
+        yield return new WaitForSeconds(.1f);
+
+        spaghettiFailed = false;
+    }
+
+    private void ToggleTether(bool on, Vector2 newHitPoint)
+    {
+        if (on)
+        {
+            tetherRenderer.enabled = true;
+            tetherHitPoint = newHitPoint;
+        }
+        else
+        {
+            tetherRenderer.enabled = false;
+            tetherHitPoint = default;
+        }
+    }
+    private void DestroyTether()
+    {
+        anchorFixedJoint.enabled = false;
+        Destroy(tetherJoint);
+        ToggleTether(false, default);
+        isStunned = false;
+    }
+
+    private void SpaghettiUpdate() // Run in Update
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (tetherHitPoint != default)
+            {
+                DestroyTether();
+                return;
+            }
+
+            if (!hasJump && heldItem != null && heldItem.itemName == "Spaghetti")
+                ActivateSpaghetti();
+        }
+
+        if (tetherRenderer.enabled == true)
+        {
+            tetherRenderer.SetPosition(0, transform.position);
+
+            if (failAimDirection != default) // If failed
+                tetherRenderer.SetPosition(1, transform.position + ((Vector3)failAimDirection * maxTetherLength));
+            else
+                tetherRenderer.SetPosition(1, tetherHitPoint);
+        }
+    }
+    private void SpaghettiFixedUpdate()
+    {
+        if (tetherHitPoint != default) // Keep velocity fast when swinging
+        {
+            if (rb.velocity.magnitude < 5)
+                DestroyTether();
+            else
+                rb.velocity = tetherSwingSpeed * rb.velocity.normalized;
+        }
     }
 }
