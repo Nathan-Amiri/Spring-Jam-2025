@@ -174,8 +174,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.701
+  m_Pitch: -1.14
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -335,8 +335,8 @@ SpriteRenderer:
   m_SortingLayerID: -736324161
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.94623876, b: 0, a: 1}
+  m_Sprite: {fileID: 512187011, guid: 4cd0f175b66ab6d4aa82fd733b5ad0dd, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -382,7 +382,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.54, y: 2.6133335}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -405,5 +405,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speechBubblePrefab: {fileID: 1438251686103825189, guid: d1a765207d7c6fc42a76a91d03c9de31, type: 3}
   dialogueLines:
-  - Hello!
-  - It's nice to finally meet you.
+  - "If you\u2019re going to the store\u2026grab me a cookie or something"
+  - Whatever.
+  - No rush.

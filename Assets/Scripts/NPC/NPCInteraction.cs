@@ -16,16 +16,20 @@ public class NPCInteraction : MonoBehaviour
         {
             if (activeBubble == null)
             {
-                Debug.Log("Start dialogue");
+                //Debug.Log("Start dialogue");
 
                 Vector3 spawnPos = transform.position + Vector3.up * 3f;
                 activeBubble = Instantiate(speechBubblePrefab, spawnPos, Quaternion.identity);
                 activeBubble.transform.SetParent(transform);
 
+                Player player = FindObjectOfType<Player>();
+                player.SetStunned(true);
+
                 DialogueBubble bubble = activeBubble.GetComponent<DialogueBubble>();
                 bubble.StartTyping(dialogueLines, () =>
                 {
-                    activeBubble = null; // Reset reference once dialogue ends
+                    player.SetStunned(false);
+                    activeBubble = null;
                 });
             }
         }
@@ -37,7 +41,6 @@ public class NPCInteraction : MonoBehaviour
 
         if (root.CompareTag("Player"))
         {
-            // Debug.Log("Player entered NPC range");
             playerInRange = true;
         }
     }

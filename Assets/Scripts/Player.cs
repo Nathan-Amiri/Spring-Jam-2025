@@ -247,6 +247,15 @@ public class Player : MonoBehaviour
         dynamicJumpOff = true;
     }
 
+    public void SetStunned(bool stunned)
+    {
+        isStunned = stunned;
+
+        if (stunned)
+        {
+            rb.velocity = Vector2.zero; // stop motion immediately
+        }
+    }
 
 
 

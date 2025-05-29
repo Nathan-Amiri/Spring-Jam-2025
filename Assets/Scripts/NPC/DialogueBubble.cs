@@ -8,18 +8,15 @@ public class DialogueBubble : MonoBehaviour
     public AudioClip[] blipSounds;
     private AudioSource audioSource;
 
-    // Default speaking speed
     public float typingSpeed = 0.03f;
 
-    // Optional callback to notify when dialogue finishes
     private System.Action onDialogueComplete;
+    private Coroutine typingRoutine;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
     }
-
-    private Coroutine typingRoutine;
 
     public void StartTyping(string[] lines, System.Action onComplete = null)
     {
@@ -43,37 +40,43 @@ public class DialogueBubble : MonoBehaviour
         foreach (string line in lines)
         {
             textUI.text = "";
-
             int charCount = 0;
+            bool skipping = false;
 
-            foreach (char c in line)
+            yield return new WaitForSeconds(0.1f); // short buffer to avoid accidental skip
+
+            for (int i = 0; i < line.Length; i++)
             {
-                textUI.text += c;
-
-                if (!char.IsWhiteSpace(c))
+                if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    charCount++;
-
-                    // Plays every other character to reduce audio clutter
-                    if (charCount % 2 == 0 && blipSounds.Length > 0)
-                    {
-                        AudioClip blip = blipSounds[Random.Range(0, blipSounds.Length)];
-                        audioSource.PlayOneShot(blip);
-                    }
+                    skipping = true;
+                    break;
                 }
 
+                textUI.text += line[i];
+
+                if (!char.IsWhiteSpace(line[i]) && (charCount % 2 == 0) && blipSounds.Length > 0)
+                {
+                    AudioClip blip = blipSounds[Random.Range(0, blipSounds.Length)];
+                    audioSource.PlayOneShot(blip);
+                }
+
+                charCount++;
                 yield return new WaitForSeconds(typingSpeed);
             }
 
-            // Wait for Enter before moving to next line
+            if (skipping)
+            {
+                textUI.text = line;
+                yield return new WaitForSeconds(0.1f);
+            }
+
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
 
-        // Call completion callback if present
         if (onDialogueComplete != null)
             onDialogueComplete.Invoke();
 
-        // Remove speech bubble when done
         Destroy(gameObject);
     }
 }

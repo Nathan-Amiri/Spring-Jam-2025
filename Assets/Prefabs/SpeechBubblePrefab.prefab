@@ -86,7 +86,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &3191138060741209612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,8 +116,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.572
-  m_Pitch: 1.07
+  m_Volume: 0.5
+  m_Pitch: 0.9
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -221,7 +221,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 53b8aef7797dbe345b0475f005b101b1, type: 3}
   - {fileID: 8300000, guid: 3c198e5b71c249842a1720d9c322b7bf, type: 3}
   - {fileID: 8300000, guid: b61d318f0f661e44a9a1b297c52a4cce, type: 3}
-  typingSpeed: 0.04
+  typingSpeed: 0.03
 --- !u!1 &3231205479058399195
 GameObject:
   m_ObjectHideFlags: 0
