@@ -18,7 +18,7 @@ public class Item : MonoBehaviour
     public string itemName; // Read by Player
 
     // CONSTANT:
-    private readonly float mushroomBounceStrength = 45;
+    private readonly float mushroomBounceStrength = 50;
     private readonly float mushroomCookieBounceStrength = 15;
     private readonly float mushroomCeleryBounceStrength = 30;
     private readonly float cookieThrowSpeed = 8;

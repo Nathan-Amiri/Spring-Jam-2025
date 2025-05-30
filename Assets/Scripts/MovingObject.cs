@@ -4,40 +4,21 @@ using UnityEngine;
 
 public class MovingObject : MonoBehaviour
 {
-    [SerializeField] private Transform destination;
+    [SerializeField] private Transform destinationReference;
 
-    public float moveSpeed = 5;
+    public float moveSpeed;
 
-    private Vector3 startPosition;
-    private float fraction = 0;
-
+    private Vector3 start;
+    private Vector3 destination;
     private bool reverse;
 
-    void Start()
-    {
-        startPosition = transform.position;
-    }
+    public Rigidbody2D rb;
 
-    void Update()
+    private void Start()
     {
-        if (Vector2.Distance(transform.position, destination.position) < .1f)
-        {
-            reverse = true;
-        }
-        else if (Vector2.Distance(transform.position, startPosition) < .1f)
-        {
-            reverse = false;
-        }
+        start = transform.position;
+        destination = destinationReference.position;
 
-        if (reverse)
-        {
-            fraction += Time.deltaTime * moveSpeed;
-            transform.position = Vector3.Lerp(startPosition, destination.position, fraction);
-        }
-        else
-        {
-            fraction -= Time.deltaTime * moveSpeed;
-            transform.position = Vector3.Lerp(destination.position, startPosition, fraction);
-        }
+        rb.velocity = (destination - transform.position).normalized * moveSpeed;
     }
 }
