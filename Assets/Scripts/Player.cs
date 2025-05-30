@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     // PREFAB REFERENCE:
     public Rigidbody2D rb; // Read by Item (Mushroom)
     [SerializeField] private PolygonCollider2D myCol;
+    [SerializeField] private SpriteRenderer sr;
 
     // SCENE REFERENCE:
     [SerializeField] private Camera mainCamera;
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
     private bool jumpInput;
 
     private bool isStunned;
+    public bool isWarp;
 
     private Coroutine deathWarpRoutine;
 
@@ -44,6 +46,7 @@ public class Player : MonoBehaviour
     private bool dynamicJumpOff;
 
     Animator animator; //Stuff to make Cawthon move.
+    public bool itemCarry;
 
     // Set by GroundCheck:
     [NonSerialized] public bool isGrounded;
@@ -62,6 +65,9 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        sr.flipX = facingLeft;
+        itemCarry = heldItem != null;
+        Debug.Log(itemCarry);
         SpaghettiUpdate();
 
         rb.gravityScale = isStunned ? 0 : gravityScale;
@@ -173,7 +179,9 @@ public class Player : MonoBehaviour
     }
     private IEnumerator DeathWarp(float duration)
     {
+        isWarp = true;
         yield return new WaitForSeconds(duration);
+        isWarp = false;
 
         rb.velocity = Vector3.zero;
         transform.position = lastGroundedPosition + new Vector2(0, .5f);
@@ -235,6 +243,7 @@ public class Player : MonoBehaviour
 
         heldItem = closestItemInRange;
         closestItemInRange.Pickup();
+        
     }
     private void DropItem()
     {

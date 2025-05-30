@@ -105,7 +105,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 6443120910450712982}
   myCol: {fileID: 296735756765845449}
+  sr: {fileID: 4280164112404299728}
   mainCamera: {fileID: 0}
+  itemCarry: 0
   tetherRenderer: {fileID: 3106910050657234886}
   anchorRB: {fileID: 0}
   anchorFixedJoint: {fileID: 0}
