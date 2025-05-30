@@ -43,6 +43,8 @@ public class Player : MonoBehaviour
 
     private bool dynamicJumpOff;
 
+    Animator animator; //Stuff to make Cawthon move.
+
     // Set by GroundCheck:
     [NonSerialized] public bool isGrounded;
     [NonSerialized] public Vector2 lastGroundedPosition;
@@ -50,6 +52,8 @@ public class Player : MonoBehaviour
 
     public void Start()
     {
+        animator = GetComponent<Animator>(); // Another animation line needed.
+
         if (deathWarpRoutine != null)
         {
             StopCoroutine(deathWarpRoutine);
@@ -106,6 +110,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        animator.SetFloat("Speed", rb.velocity.magnitude); //Needed to read "Speed" parameter in Animator tab.
         SpaghettiFixedUpdate();
 
         if (isStunned)
