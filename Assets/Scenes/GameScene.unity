@@ -445,9 +445,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 726798414}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.0833335, y: 6, z: 0}
+  m_LocalScale: {x: 0.16666667, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1057139585}
@@ -522,7 +522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7531807201971091941, guid: 7c2b69a587e65874ab708cc3689b4c6f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 6.0002446
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7531807201971091941, guid: 7c2b69a587e65874ab708cc3689b4c6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -593,7 +593,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destinationReference: {fileID: 726798415}
+  destinationSR: {fileID: 726798416}
   moveSpeed: 4
+  pauseDuration: 1
   rb: {fileID: 1057139587}
 --- !u!4 &1057139585 stripped
 Transform:
