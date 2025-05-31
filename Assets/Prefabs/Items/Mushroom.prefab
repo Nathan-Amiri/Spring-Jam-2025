@@ -244,7 +244,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.5, y: -2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3294206799532035473}
@@ -323,6 +323,7 @@ MonoBehaviour:
   closestCollider: {fileID: -7525461947522025920}
   noClipColliders: []
   pickupIconSR: {fileID: 3971920125342645574}
+  broccoliStalkSR: {fileID: 0}
   cornDogJoint: {fileID: 0}
   itemName: Mushroom
 --- !u!50 &-3615031215732231382
