@@ -54,6 +54,9 @@ TagManager:
   - name: Player
     uniqueID: 3068430867
     locked: 0
+  - name: Can
+    uniqueID: 2546326171
+    locked: 0
   - name: InteractIcons
     uniqueID: 890661645
     locked: 0

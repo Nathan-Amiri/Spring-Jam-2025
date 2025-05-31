@@ -13,8 +13,6 @@ public class Item : MonoBehaviour
 
     [SerializeField] private SpriteRenderer pickupIconSR;
 
-    [SerializeField] private SpriteRenderer broccoliStalkSR;
-
     [SerializeField] private FixedJoint2D cornDogJoint;
 
     public string itemName; // Read by Player
@@ -24,7 +22,7 @@ public class Item : MonoBehaviour
     // CONSTANT:
     private readonly float mushroomBounceStrength = 50;
     private readonly float mushroomCookieBounceStrength = 15;
-    private readonly float mushroomCeleryBounceStrength = 30;
+    private readonly float mushroomCarrotBounceStrength = 30;
     private readonly float cookieThrowSpeed = 8;
     private readonly float cornDogThrowSpeed = 13;
     private readonly float cornDogEmbedDistance = .75f; // The distance between the center of the corn dog and the end of the corn dog (the start of the stick)
@@ -92,9 +90,9 @@ public class Item : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D col)
     {
-        // Mushroom bounce celery
-        if (col.transform.parent != null && col.transform.parent.name == "Celery" && itemName == "Mushroom")
-            col.attachedRigidbody.AddForceAtPosition(Vector2.up * mushroomCeleryBounceStrength, transform.position + new Vector3(0, .5f), ForceMode2D.Impulse);
+        // Mushroom bounce Carrot
+        if (col.transform.parent != null && col.transform.parent.name == "Carrot" && itemName == "Mushroom")
+            col.attachedRigidbody.AddForceAtPosition(Vector2.up * mushroomCarrotBounceStrength, transform.position + new Vector3(0, .5f), ForceMode2D.Impulse);
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -127,9 +125,6 @@ public class Item : MonoBehaviour
             cornDogAttachmentItem = null;
             cornDogJoint.enabled = false;
         }
-
-        if (itemName == "Broccoli")
-            broccoliStalkSR.enabled = false;
     }
 
     public void Drop(Player player, bool facingLeft)
@@ -150,12 +145,11 @@ public class Item : MonoBehaviour
 
             case "Broccoli":
                 transform.position = player.transform.position + new Vector3(.5f * xDirection, 2);
-                broccoliStalkSR.enabled = true;
                 break;
 
-            case "Celery":
+            case "Carrot":
                 transform.position = player.transform.position + new Vector3(1 * xDirection, 4.5f);
-                transform.rotation = Quaternion.Euler(0, facingLeft ? 180 : 0, 85);
+                transform.rotation = Quaternion.Euler(0, facingLeft ? 180 : 0, 260);
                 break;
 
             case "Spinach":
