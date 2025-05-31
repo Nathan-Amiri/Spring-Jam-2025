@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     public Rigidbody2D rb; // Read by Item (Mushroom)
     [SerializeField] private List<Collider2D> myCols = new();
     [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private AudioSource footstepSource;
+    private AudioManager audioManager;
+
 
     // SCENE REFERENCE:
     [SerializeField] private Camera mainCamera;
@@ -57,6 +60,8 @@ public class Player : MonoBehaviour
     public void Start()
     {
         animator = GetComponent<Animator>(); // Another animation line needed.
+
+        audioManager = AudioManager.Instance;
 
         SpaghettiStart();
         MovingPlatformStart();
@@ -160,8 +165,22 @@ public class Player : MonoBehaviour
                 hasJump = false;
 
                 rb.velocity = new(rb.velocity.x, jumpForce);
+                audioManager.PlaySFX(audioManager.jumpClip);
             }
         }
+
+        // Footstep SFX logic
+        if (isGrounded && Mathf.Abs(moveInput) > 0.1f)
+        {
+            if (!footstepSource.isPlaying)
+                footstepSource.Play();
+        }
+        else
+        {
+            if (footstepSource.isPlaying)
+                footstepSource.Stop();
+        }
+
     }
     private void LateUpdate()
     {
@@ -170,6 +189,8 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        audioManager.PlaySFX(audioManager.hurtClip);
+
         DestroyTether();
 
         deathWarpRoutine = StartCoroutine(DeathWarp(deathWarpDuration));
@@ -249,11 +270,13 @@ public class Player : MonoBehaviour
 
         heldItem = closestItemInRange;
         closestItemInRange.Pickup();
-        
+        audioManager.PlaySFX(audioManager.pickupClip);
+
     }
     private void DropItem()
     {
         heldItem.Drop(this, facingLeft);
+        audioManager.PlaySFX(audioManager.throwClip);
         heldItem = null;
     }
 

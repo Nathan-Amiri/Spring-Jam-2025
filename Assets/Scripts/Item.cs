@@ -16,6 +16,8 @@ public class Item : MonoBehaviour
     [SerializeField] private FixedJoint2D cornDogJoint;
 
     public string itemName; // Read by Player
+    private AudioManager audioManager;
+
 
     // CONSTANT:
     private readonly float mushroomBounceStrength = 50;
@@ -37,6 +39,8 @@ public class Item : MonoBehaviour
     private void Start()
     {
         defaultConstraints = rb.constraints;
+        audioManager = AudioManager.Instance;
+
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -80,6 +84,7 @@ public class Item : MonoBehaviour
                 // Set velocity instead of adding force so that current fall speed doesn't affect bounce height
                 player.rb.velocity = new(player.rb.velocity.x, mushroomBounceStrength);
                 player.TurnOffDynamicJump();
+                audioManager.PlaySFX(audioManager.bounceClip);
                 break;
         }
     }
