@@ -13,6 +13,8 @@ public class Item : MonoBehaviour
 
     [SerializeField] private SpriteRenderer pickupIconSR;
 
+    [SerializeField] private SpriteRenderer broccoliStalkSR;
+
     [SerializeField] private FixedJoint2D cornDogJoint;
 
     public string itemName; // Read by Player
@@ -125,6 +127,9 @@ public class Item : MonoBehaviour
             cornDogAttachmentItem = null;
             cornDogJoint.enabled = false;
         }
+
+        if (itemName == "Broccoli")
+            broccoliStalkSR.enabled = false;
     }
 
     public void Drop(Player player, bool facingLeft)
@@ -145,6 +150,7 @@ public class Item : MonoBehaviour
 
             case "Broccoli":
                 transform.position = player.transform.position + new Vector3(.5f * xDirection, 2);
+                broccoliStalkSR.enabled = true;
                 break;
 
             case "Celery":

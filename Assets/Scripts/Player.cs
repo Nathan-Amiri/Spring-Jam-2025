@@ -80,7 +80,10 @@ public class Player : MonoBehaviour
             rb.gravityScale = defaultGravityScale;
 
         if (transform.position.y < deathY)
+        {
+            transform.position = new(transform.position.x, deathY + 10);
             Die();
+        }
 
         if (rb.velocity.y <= 0)
             dynamicJumpOff = false;
