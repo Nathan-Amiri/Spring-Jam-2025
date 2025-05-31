@@ -6,6 +6,6 @@ public class CookieIcon : MonoBehaviour
 {
     private void Update()
     {
-        transform.SetPositionAndRotation(transform.parent.position + (Vector3.up * 1), Quaternion.Euler(0, 0, transform.parent.rotation.z));
+        transform.SetPositionAndRotation(transform.parent.position + (Vector3.up * 1.5f), Quaternion.Euler(0, 0, transform.parent.rotation.z));
     }
 }

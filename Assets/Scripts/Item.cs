@@ -67,7 +67,7 @@ public class Item : MonoBehaviour
         }
 
         // Can stop upon touching Terrain
-        if (itemName == "Can" && (col.CompareTag("Terrain") || col.CompareTag("Hazard") || col.CompareTag("ItemTerrain") || col.CompareTag("PlayerPassThrough")))
+        if (itemName == "Can" && (col.CompareTag("Terrain") || col.CompareTag("Hazard") || col.CompareTag("ItemTerrain")))
             rb.velocity = Vector2.zero;
 
         if (uninteractable || !col.CompareTag("Player"))
@@ -98,7 +98,7 @@ public class Item : MonoBehaviour
     private void OnTriggerExit2D(Collider2D col)
     {
         // Can start upon leaving ItemTerrain
-        if (itemName == "Can" && (col.CompareTag("Terrain") || col.CompareTag("Hazard") || col.CompareTag("ItemTerrain") || col.CompareTag("PlayerPassThrough")))
+        if (itemName == "Can" && (col.CompareTag("Terrain") || col.CompareTag("Hazard") || col.CompareTag("ItemTerrain")))
             rb.velocity = Vector2.down * canFallSpeed;
     }
 

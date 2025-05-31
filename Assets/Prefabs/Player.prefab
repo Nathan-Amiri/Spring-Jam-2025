@@ -196,8 +196,8 @@ MonoBehaviour:
   isWarp: 0
   itemCarry: 0
   tetherRenderer: {fileID: 8512042308058919639}
-  anchorRB: {fileID: 0}
-  anchorFixedJoint: {fileID: 0}
+  anchorRB: {fileID: 6090089640566269478}
+  anchorFixedJoint: {fileID: 4552307877146074887}
   movingPlatformAnchor: {fileID: 3514149762836824260}
 --- !u!50 &6443120910450712982
 Rigidbody2D:
