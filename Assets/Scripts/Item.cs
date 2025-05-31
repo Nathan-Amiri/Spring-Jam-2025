@@ -24,6 +24,7 @@ public class Item : MonoBehaviour
     private readonly float cookieThrowSpeed = 8;
     private readonly float cornDogThrowSpeed = 13;
     private readonly float cornDogEmbedDistance = .75f; // The distance between the center of the corn dog and the end of the corn dog (the start of the stick)
+    private readonly float canFallSpeed = 2;
 
     // DYNAMIC:
     private RigidbodyConstraints2D defaultConstraints;
@@ -33,7 +34,7 @@ public class Item : MonoBehaviour
 
     private Item cornDogAttachmentItem; // The item Corn Dog is attached to, if any
 
-    private void Awake()
+    private void Start()
     {
         defaultConstraints = rb.constraints;
     }
@@ -61,6 +62,10 @@ public class Item : MonoBehaviour
                 cornDogAttachmentItem = attachmentParentItem;
         }
 
+        // Can stop upon touching Terrain
+        if (itemName == "Can" && (col.CompareTag("Terrain") || col.CompareTag("Hazard") || col.CompareTag("ItemTerrain") || col.CompareTag("PlayerPassThrough")))
+            rb.velocity = Vector2.zero;
+
         if (uninteractable || !col.CompareTag("Player"))
             return;
 
@@ -83,6 +88,13 @@ public class Item : MonoBehaviour
         // Mushroom bounce celery
         if (col.transform.parent != null && col.transform.parent.name == "Celery" && itemName == "Mushroom")
             col.attachedRigidbody.AddForceAtPosition(Vector2.up * mushroomCeleryBounceStrength, transform.position + new Vector3(0, .5f), ForceMode2D.Impulse);
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        // Can start upon leaving ItemTerrain
+        if (itemName == "Can" && (col.CompareTag("Terrain") || col.CompareTag("Hazard") || col.CompareTag("ItemTerrain") || col.CompareTag("PlayerPassThrough")))
+            rb.velocity = Vector2.down * canFallSpeed;
     }
 
     private void Update()
@@ -147,6 +159,7 @@ public class Item : MonoBehaviour
 
             case "Can":
                 transform.position = player.transform.position + new Vector3(2 * xDirection, .75f);
+                rb.velocity = Vector2.down * canFallSpeed;
                 break;
 
             default:

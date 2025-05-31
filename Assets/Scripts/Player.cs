@@ -7,21 +7,22 @@ public class Player : MonoBehaviour
 {
     // PREFAB REFERENCE:
     public Rigidbody2D rb; // Read by Item (Mushroom)
-    [SerializeField] private PolygonCollider2D myCol;
+    [SerializeField] private List<Collider2D> myCols = new();
     [SerializeField] private SpriteRenderer sr;
 
     // SCENE REFERENCE:
     [SerializeField] private Camera mainCamera;
 
     // CONSTANT:
-    private readonly float gravityScale = 3.5f;
+    private readonly float defaultGravityScale = 3.5f;
+    private readonly float holdingItemGravityScale = 5;
     private readonly float moveSpeed = 8;
     private readonly float jumpForce = 15;
     private readonly float fallMultiplier = 3; // Fastfall
     private readonly float lowJumpMultiplier = 10; // Dynamic jump
     [NonSerialized] public readonly float coyoteTime = .1f; // Read by GroundCheck
 
-    private readonly float deathWarpDuration = .15f;
+    private readonly float deathWarpDuration = .2f;
 
     private readonly float deathY = -50; // Needs to be a value below the map, to prevent softlocks in case the player manages to get out of bounds
 
@@ -57,20 +58,21 @@ public class Player : MonoBehaviour
     {
         animator = GetComponent<Animator>(); // Another animation line needed.
 
-        if (deathWarpRoutine != null)
-        {
-            StopCoroutine(deathWarpRoutine);
-            myCol.enabled = true;
-        }
+        SpaghettiStart();
+        MovingPlatformStart();
     }
     private void Update()
     {
         sr.flipX = facingLeft;
         itemCarry = heldItem != null;
-        Debug.Log(itemCarry);
         SpaghettiUpdate();
 
-        rb.gravityScale = isStunned ? 0 : gravityScale;
+        if (isStunned)
+            rb.gravityScale = 0;
+        else if (heldItem != null)
+            rb.gravityScale = holdingItemGravityScale;
+        else
+            rb.gravityScale = defaultGravityScale;
 
         if (transform.position.y < deathY)
             Die();
@@ -86,7 +88,7 @@ public class Player : MonoBehaviour
 
 
         if (isGrounded)
-            lastGroundedPosition = transform.position;
+            lastGroundedPosition = transform.position + new Vector3(0, .5f);
 
         moveInput = Input.GetAxisRaw("Horizontal");
 
@@ -116,8 +118,10 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        animator.SetFloat("Speed", rb.velocity.magnitude); //Needed to read "Speed" parameter in Animator tab.
         SpaghettiFixedUpdate();
+        MovingPlatformFixedUpdate();
+
+        animator.SetFloat("Speed", rb.velocity.magnitude); //Needed to read "Speed" parameter in Animator tab.
 
         if (isStunned)
             return;
@@ -166,29 +170,31 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        myCol.enabled = false;
+        DestroyTether();
 
         deathWarpRoutine = StartCoroutine(DeathWarp(deathWarpDuration));
+    }
+    private IEnumerator DeathWarp(float duration)
+    {
+        foreach (Collider2D col in myCols)
+            col.enabled = false;
 
         isStunned = true;
 
         float warpSpeed = Vector2.Distance(lastGroundedPosition, transform.position) / deathWarpDuration;
         rb.velocity = warpSpeed * ((Vector3)lastGroundedPosition - transform.position).normalized;
 
-        DestroyTether();
-    }
-    private IEnumerator DeathWarp(float duration)
-    {
         isWarp = true;
         yield return new WaitForSeconds(duration);
         isWarp = false;
 
         rb.velocity = Vector3.zero;
-        transform.position = lastGroundedPosition + new Vector2(0, .5f);
+        transform.position = lastGroundedPosition;
 
         isStunned = false;
 
-        myCol.enabled = true;
+        foreach (Collider2D col in myCols)
+            col.enabled = true;
 
         hasJump = true; // Softlock prevention
     }
@@ -282,7 +288,7 @@ public class Player : MonoBehaviour
 
 
 
-
+    // Spaghetti
     [SerializeField] private LineRenderer tetherRenderer;
     [SerializeField] private Rigidbody2D anchorRB;
     [SerializeField] private FixedJoint2D anchorFixedJoint;
@@ -297,6 +303,10 @@ public class Player : MonoBehaviour
 
     private bool spaghettiFailed;
 
+    private void SpaghettiStart()
+    {
+        anchorRB.transform.parent = null;
+    }
     private void ActivateSpaghetti()
     {
         if (spaghettiFailed)
@@ -397,6 +407,34 @@ public class Player : MonoBehaviour
                 DestroyTether();
             else
                 rb.velocity = tetherSwingSpeed * rb.velocity.normalized;
+        }
+    }
+
+
+
+    // Moving platform:
+    [SerializeField] private Transform movingPlatformAnchor;
+    private Vector3 previousAnchorPosition;
+    private void MovingPlatformStart() // Called by Start
+    {
+        movingPlatformAnchor.parent = null;
+        previousAnchorPosition = movingPlatformAnchor.position;
+    }
+    public void SetMovingPlatform(Transform newMovingPlatform) // Called by GroundCheck
+    {
+        if (newMovingPlatform == null)
+            movingPlatformAnchor.parent = null;
+        else
+            movingPlatformAnchor.parent = newMovingPlatform;
+    }
+    private void MovingPlatformFixedUpdate() // Run in FixedUpdate
+    {
+        if (movingPlatformAnchor.parent != null)
+        {
+            Vector3 playerOffset = movingPlatformAnchor.position - previousAnchorPosition;
+            previousAnchorPosition = movingPlatformAnchor.position;
+
+            transform.position += playerOffset;
         }
     }
 }
