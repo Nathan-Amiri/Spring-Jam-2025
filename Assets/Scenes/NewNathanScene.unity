@@ -279,10 +279,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3971920125342645574, guid: 3c2d9691521edac4eaa735271923dcca, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5164351340047446828, guid: 3c2d9691521edac4eaa735271923dcca, type: 3}
       propertyPath: m_LocalPosition.x
       value: -38
@@ -1085,10 +1081,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1394772226810495218, guid: 3cae47f9fe4931a4897abc0d57574eaf, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3827852895472508940, guid: 3cae47f9fe4931a4897abc0d57574eaf, type: 3}
       propertyPath: m_Name
       value: Broccoli
@@ -1099,7 +1091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5812400541926014198, guid: 3cae47f9fe4931a4897abc0d57574eaf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.2
+      value: 1.28
       objectReference: {fileID: 0}
     - target: {fileID: 5812400541926014198, guid: 3cae47f9fe4931a4897abc0d57574eaf, type: 3}
       propertyPath: m_LocalPosition.z

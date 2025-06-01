@@ -13,6 +13,8 @@ public class Item : MonoBehaviour
 
     [SerializeField] private SpriteRenderer pickupIconSR;
 
+    [SerializeField] private SpriteRenderer canSecondSR;
+
     [SerializeField] private FixedJoint2D cornDogJoint;
 
     public string itemName; // Read by Player
@@ -125,6 +127,9 @@ public class Item : MonoBehaviour
             cornDogAttachmentItem = null;
             cornDogJoint.enabled = false;
         }
+
+        if (itemName == "Can")
+            canSecondSR.enabled = false;
     }
 
     public void Drop(Player player, bool facingLeft)
@@ -133,6 +138,9 @@ public class Item : MonoBehaviour
         sr.enabled = true;
         foreach (Collider2D col in myCols)
             col.enabled = true;
+
+        if (itemName == "Can")
+            canSecondSR.enabled = true;
 
         int xDirection = facingLeft ? -1 : 1;
 
