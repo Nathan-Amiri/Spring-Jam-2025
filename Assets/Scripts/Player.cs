@@ -68,6 +68,7 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        animator.SetBool("isRun", isRun);
         animator.SetBool("itemCarry", itemCarry);
         animator.SetBool("hasJump", hasJump);
         animator.SetBool("isWarp", isWarp);
@@ -130,7 +131,6 @@ public class Player : MonoBehaviour
         SpaghettiFixedUpdate();
         MovingPlatformFixedUpdate();
 
-        animator.SetFloat("Speed", rb.velocity.magnitude); //Needed to read "Speed" parameter in Animator tab.
 
         if (isStunned)
             return;
