@@ -404,11 +404,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb2781d49574e345988a0d87c30d58a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speechBubblePrefab: {fileID: 1438251686103825189, guid: d1a765207d7c6fc42a76a91d03c9de31, type: 3}
+  speechBubblePrefab: {fileID: 1438251686103825189, guid: 005053b31045e0f48b3b0f201872599a, type: 3}
   dialogueLines:
-  - "If you\u2019re going to the store\u2026grab me a cookie or something"
-  - Whatever.
-  - No rush.
+  - I...
+  - WANT...
+  - CELERY!!!
 --- !u!95 &2155363091386277052
 Animator:
   serializedVersion: 5

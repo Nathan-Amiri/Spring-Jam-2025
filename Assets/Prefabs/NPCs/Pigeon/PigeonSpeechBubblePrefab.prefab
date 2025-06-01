@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2435560656524698971}
   - component: {fileID: 9088277197611374394}
   m_Layer: 5
-  m_Name: SpeechBubblePrefab
+  m_Name: PigeonSpeechBubblePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -214,8 +214,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textUI: {fileID: 1631939034926273795}
   blipSounds:
-  - {fileID: 8300000, guid: 4aa3a9008b53aba4a9fa509d431c49fe, type: 3}
-  - {fileID: 8300000, guid: 77d3e94b5ada0ce489de5d87dee765fc, type: 3}
+  - {fileID: 8300000, guid: 08e7d9784747fc34c8252dc94ec90a1e, type: 3}
+  - {fileID: 8300000, guid: 48434ddf89d1c0740bf344826fc73c44, type: 3}
+  - {fileID: 8300000, guid: ffafa900eef28544e8641193da880d3f, type: 3}
+  - {fileID: 8300000, guid: 42ffcc3961267ab4a8878290120bdb9d, type: 3}
+  - {fileID: 8300000, guid: 53b8aef7797dbe345b0475f005b101b1, type: 3}
+  - {fileID: 8300000, guid: 3c198e5b71c249842a1720d9c322b7bf, type: 3}
+  - {fileID: 8300000, guid: b61d318f0f661e44a9a1b297c52a4cce, type: 3}
   typingSpeed: 0.03
 --- !u!1 &3231205479058399195
 GameObject:
