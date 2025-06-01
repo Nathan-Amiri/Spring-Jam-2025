@@ -17,7 +17,7 @@ public class GroundCheck : MonoBehaviour
             player.hasJump = true; // Don't set player to isGrounded because items don't set deathwarp position!
 
         if (col.CompareTag("Terrain") || col.CompareTag("ItemTerrain"))
-            if (col.gameObject.name != "Cookie")
+            if (col.gameObject.name != "Cookie" && (col.transform.parent == null || col.transform.parent.name != "Carrot"))
                 player.SetMovingPlatform(col.transform);
     }
     private void OnTriggerExit2D(Collider2D col)
@@ -33,7 +33,7 @@ public class GroundCheck : MonoBehaviour
             player.hasJump = false;
 
         if (col.CompareTag("Terrain") || col.CompareTag("ItemTerrain"))
-            if (col.gameObject.name != "Cookie")
+            if (col.gameObject.name != "Cookie" && (col.transform.parent == null || col.transform.parent.name != "Carrot"))
                 player.SetMovingPlatform(null);
     }
 }

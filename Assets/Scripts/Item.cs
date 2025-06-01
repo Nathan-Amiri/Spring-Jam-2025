@@ -28,7 +28,6 @@ public class Item : MonoBehaviour
     private readonly float cookieThrowSpeed = 8;
     private readonly float cornDogThrowSpeed = 13;
     private readonly float cornDogEmbedDistance = .85f; // The distance between the center of the corn dog and the end of the corn dog (the start of the stick)
-    private readonly float canFallSpeed = 2;
 
     // DYNAMIC:
     private RigidbodyConstraints2D defaultConstraints;
@@ -52,22 +51,6 @@ public class Item : MonoBehaviour
             if (itemName == "Mushroom" && col.transform.position.y > transform.position.y + .5f)
                 col.attachedRigidbody.velocity = new(col.attachedRigidbody.velocity.x, mushroomCookieBounceStrength);
 
-        // Corn Dog stick into terrain/hazard
-        if (itemName == "Corn Dog" && (col.CompareTag("Hazard") || col.CompareTag("Terrain") || col.CompareTag("ItemTerrain")))
-        {
-            // MyCols[1] is the stick trigger collider
-            transform.position = col.bounds.ClosestPoint(myCols[1].transform.position) - (transform.right * cornDogEmbedDistance);
-
-            cornDogJoint.enabled = true;
-            cornDogJoint.connectedBody = col.attachedRigidbody;
-
-            // The Item script will always be on the collider object or its parent
-            if (col.TryGetComponent(out Item attachmentItem))
-                cornDogAttachmentItem = attachmentItem;
-            else if (col.transform.parent != null && col.transform.parent.TryGetComponent(out Item attachmentParentItem))
-                cornDogAttachmentItem = attachmentParentItem;
-        }
-
         // Can stop upon touching Terrain
         if (itemName == "Can" && (col.CompareTag("Terrain") || col.CompareTag("Hazard") || col.CompareTag("ItemTerrain")))
             rb.velocity = Vector2.zero;
@@ -77,17 +60,12 @@ public class Item : MonoBehaviour
 
         Player player = col.GetComponent<Player>();
 
-        switch (itemName)
+        if (itemName == "Mushroom" && player.rb.velocity.y < 0 && player.transform.position.y > transform.position.y + 1)
         {
-            case "Mushroom":
-                if (player.rb.velocity.y >= 0)
-                    break;
-
-                // Set velocity instead of adding force so that current fall speed doesn't affect bounce height
-                player.rb.velocity = new(player.rb.velocity.x, mushroomBounceStrength);
-                player.TurnOffDynamicJump();
-                audioManager.PlaySFX(audioManager.bounceClip);
-                break;
+            // Set velocity instead of adding force so that current fall speed doesn't affect bounce height
+            player.rb.velocity = new(player.rb.velocity.x, mushroomBounceStrength);
+            player.TurnOffDynamicJump();
+            audioManager.PlaySFX(audioManager.bounceClip);
         }
     }
     private void OnTriggerStay2D(Collider2D col)
@@ -95,13 +73,6 @@ public class Item : MonoBehaviour
         // Mushroom bounce Carrot
         if (col.transform.parent != null && col.transform.parent.name == "Carrot" && itemName == "Mushroom")
             col.attachedRigidbody.AddForceAtPosition(Vector2.up * mushroomCarrotBounceStrength, transform.position + new Vector3(0, .5f), ForceMode2D.Impulse);
-    }
-
-    private void OnTriggerExit2D(Collider2D col)
-    {
-        // Can start upon leaving ItemTerrain
-        if (itemName == "Can" && (col.CompareTag("Terrain") || col.CompareTag("Hazard") || col.CompareTag("ItemTerrain")))
-            rb.velocity = Vector2.down * canFallSpeed;
     }
 
     private void Update()
@@ -172,7 +143,6 @@ public class Item : MonoBehaviour
 
             case "Can":
                 transform.position = player.transform.position + new Vector3(3 * xDirection, 0);
-                rb.velocity = Vector2.down * canFallSpeed;
                 break;
 
             default: // Just Mushroom right now
@@ -183,9 +153,10 @@ public class Item : MonoBehaviour
         uninteractable = false;
     }
 
-    public void TogglePickupIcon(bool on)
+    public void TogglePickupIcon(bool on, bool fade)
     {
         pickupIconSR.enabled = on;
+        pickupIconSR.color = fade ? new Color32(255, 255, 255, 80) : Color.white;
     }
 
     public void OnEnterCanSecondTrigger(Collider2D col, bool enter) // Only the Can will run this method
@@ -220,6 +191,26 @@ public class Item : MonoBehaviour
                 c.excludeLayers = mask;
             else
                 c.excludeLayers = default;
+        }
+    }
+
+    public void CornDogStickIntoStuff(Collider2D col, bool groundTrigger) // Called by specific trigger scripts
+    {
+        // Corn Dog stick into terrain/hazard
+        if (itemName == "Corn Dog" && (col.CompareTag("Hazard") || col.CompareTag("Terrain") || col.CompareTag("ItemTerrain")))
+        {
+            // MyCols[1] is the stick trigger collider
+            if (!groundTrigger)
+                transform.position = col.bounds.ClosestPoint(myCols[1].transform.position) - (transform.right * cornDogEmbedDistance);
+
+            cornDogJoint.enabled = true;
+            cornDogJoint.connectedBody = col.attachedRigidbody;
+
+            // The Item script will always be on the collider object or its parent
+            if (col.TryGetComponent(out Item attachmentItem))
+                cornDogAttachmentItem = attachmentItem;
+            else if (col.transform.parent != null && col.transform.parent.TryGetComponent(out Item attachmentParentItem))
+                cornDogAttachmentItem = attachmentParentItem;
         }
     }
 }

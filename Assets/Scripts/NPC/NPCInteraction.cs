@@ -7,7 +7,10 @@ public class NPCInteraction : MonoBehaviour
     public string desiredItemName;
 
     public GameObject speechBubblePrefab;
+
     public HoldItemIcon holdItemIcon;
+
+    public SpriteRenderer talkIcon;
 
     public string[] bothEmptyDialogueLines;     // both empty
     public string[] npcItemDialogueLines;    // npc item player empty
@@ -29,6 +32,8 @@ public class NPCInteraction : MonoBehaviour
 
     void Update()
     {
+        talkIcon.enabled = playerInRange && activeBubble == null;
+
         if (playerInRange && Input.GetKeyDown(KeyCode.P))
         {
             if (activeBubble == null)

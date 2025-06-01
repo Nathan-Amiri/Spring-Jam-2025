@@ -243,7 +243,7 @@ public class Player : MonoBehaviour
         // 2. Remove item if it leaves range and turn off its icon
         if (col.TryGetComponent(out Item itemInRange))
         {
-            itemInRange.TogglePickupIcon(false);
+            itemInRange.TogglePickupIcon(false, false);
             itemsInPickupRange.Remove(itemInRange);
         }
     }
@@ -251,6 +251,14 @@ public class Player : MonoBehaviour
     {
         if (itemsInPickupRange.Count == 0)
             return;
+
+        if (heldItem != null)
+        {
+            foreach (Item item in itemsInPickupRange)
+                item.TogglePickupIcon(true, true);
+
+            return;
+        }
 
         Item closestItemInRange = null;
 
@@ -274,7 +282,7 @@ public class Player : MonoBehaviour
         }
 
         foreach (Item item in itemsInPickupRange)
-            item.TogglePickupIcon(item == closestItemInRange);
+            item.TogglePickupIcon(true, item != closestItemInRange);
 
         // 4. Pick up closest item if input and not holding item
         if (!itemPickupInput || heldItem != null)
@@ -398,7 +406,7 @@ public class Player : MonoBehaviour
         tetherRenderer.enabled = true;
         failAimDirection = aimDirection;
 
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(.1f);
 
         failAimDirection = default;
         tetherRenderer.enabled = false;
@@ -445,7 +453,7 @@ public class Player : MonoBehaviour
 
         if (tetherRenderer.enabled == true)
         {
-            tetherRenderer.SetPosition(0, transform.position);
+            tetherRenderer.SetPosition(0, new Vector2(transform.position.x, transform.position.y + 1.5f));
 
             if (failAimDirection != default) // If failed
                 tetherRenderer.SetPosition(1, transform.position + ((Vector3)failAimDirection * maxTetherLength));

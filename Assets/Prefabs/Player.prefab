@@ -163,7 +163,7 @@ SpriteRenderer:
   m_SortingLayerID: -1226536429
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -941766314, guid: c324975537acd482faa91afb22c36659, type: 3}
+  m_Sprite: {fileID: -1607831634, guid: c324975537acd482faa91afb22c36659, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -196,10 +196,11 @@ MonoBehaviour:
   holdItemIcon: {fileID: 5389062375525457447}
   mainCamera: {fileID: 0}
   controlsScreen: {fileID: 0}
+  winScreen: {fileID: 0}
   itemCarry: 0
   tetherRenderer: {fileID: 8512042308058919639}
   anchorRB: {fileID: 6090089640566269478}
-  anchorFixedJoint: {fileID: 4552307877146074887}
+  anchorFixedJoint: {fileID: 0}
   movingPlatformAnchor: {fileID: 3514149762836824260}
 --- !u!50 &6443120910450712982
 Rigidbody2D:
@@ -264,7 +265,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.0837095, y: 1.9166666}
+    oldSize: {x: 1.5558363, y: 1.888889}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -813,13 +814,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3453093957299109}
     m_Modifications:
+    - target: {fileID: 23389461716698390, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
+      propertyPath: m_Size.x
+      value: 1.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 23389461716698390, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
+      propertyPath: m_Size.y
+      value: 4.1875
+      objectReference: {fileID: 0}
+    - target: {fileID: 23389461716698390, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 23389461716698390, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1226536429
+      objectReference: {fileID: 0}
     - target: {fileID: 4144450558487534669, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4144450558487534669, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 4144450558487534669, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -857,6 +874,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HoldItemIcon
       objectReference: {fileID: 0}
+    - target: {fileID: 5959778046958969560, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
+      propertyPath: icons.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 8621f20fed8573e48851c0bb629e2277, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
