@@ -148,9 +148,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speechBubblePrefab: {fileID: 1438251686103825189, guid: 8a9b6b8991453334e9ccac08a9c770b9, type: 3}
   dialogueLines:
-  - "If you\u2019re going to the store\u2026grab me a cookie or something"
-  - Whatever.
-  - No rush.
+  - Ssss...everyone knows that snakes only eat long foods.
+  - See if you can find one thats "sticky."
+  - He he he...
+  - he...
 --- !u!95 &1778713783961946258
 Animator:
   serializedVersion: 5
