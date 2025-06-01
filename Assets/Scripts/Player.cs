@@ -37,9 +37,10 @@ public class Player : MonoBehaviour
     private bool jumpInput;
 
     private bool isStunned;
-    public bool isWarp;
 
-    private Coroutine deathWarpRoutine;
+        // Animator:
+    [NonSerialized] public bool isWarp;
+    [NonSerialized] public bool isRun;
 
     private bool facingLeft; // Read by Item
 
@@ -68,6 +69,8 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        isRun = !isStunned && moveInput != 0;
+
         sr.flipX = facingLeft;
         itemCarry = heldItem != null;
         SpaghettiUpdate();
@@ -196,7 +199,7 @@ public class Player : MonoBehaviour
 
         DestroyTether();
 
-        deathWarpRoutine = StartCoroutine(DeathWarp(deathWarpDuration));
+        StartCoroutine(DeathWarp(deathWarpDuration));
     }
     private IEnumerator DeathWarp(float duration)
     {
