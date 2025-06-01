@@ -25,7 +25,7 @@ public class Item : MonoBehaviour
     private readonly float mushroomCarrotBounceStrength = 30;
     private readonly float cookieThrowSpeed = 8;
     private readonly float cornDogThrowSpeed = 13;
-    private readonly float cornDogEmbedDistance = .75f; // The distance between the center of the corn dog and the end of the corn dog (the start of the stick)
+    private readonly float cornDogEmbedDistance = .85f; // The distance between the center of the corn dog and the end of the corn dog (the start of the stick)
     private readonly float canFallSpeed = 2;
 
     // DYNAMIC:
@@ -139,21 +139,21 @@ public class Item : MonoBehaviour
         switch (itemName)
         {
             case "Cookie":
-                transform.position = player.transform.position + new Vector3(.5f * xDirection, 0);
+                transform.position = player.transform.position + new Vector3(.5f * xDirection, -.18f);
                 rb.velocity = new Vector2(xDirection * cookieThrowSpeed, 0);
                 break;
 
             case "Broccoli":
-                transform.position = player.transform.position + new Vector3(.5f * xDirection, 2);
+                transform.position = player.transform.position + new Vector3(.5f * xDirection, 2.3f);
                 break;
 
             case "Carrot":
-                transform.position = player.transform.position + new Vector3(1 * xDirection, 4.5f);
+                transform.position = player.transform.position + new Vector3(1.7f * xDirection, 3.7f);
                 transform.rotation = Quaternion.Euler(0, facingLeft ? 180 : 0, 260);
                 break;
 
             case "Spinach":
-                transform.position = player.transform.position + new Vector3(0, 1);
+                transform.position = player.transform.position + new Vector3(0, 2);
                 break;
 
             case "Corn Dog":
@@ -163,12 +163,12 @@ public class Item : MonoBehaviour
                 break;
 
             case "Can":
-                transform.position = player.transform.position + new Vector3(2 * xDirection, .75f);
+                transform.position = player.transform.position + new Vector3(3 * xDirection, 0);
                 rb.velocity = Vector2.down * canFallSpeed;
                 break;
 
-            default:
-                transform.position = player.transform.position + new Vector3(.5f * xDirection, 0);
+            default: // Just Mushroom right now
+                transform.position = player.transform.position + new Vector3(.5f * xDirection, -.1f);
                 break;
         }
 
