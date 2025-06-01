@@ -10,11 +10,13 @@ public class Player : MonoBehaviour
     [SerializeField] private List<Collider2D> myCols = new();
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private AudioSource footstepSource;
+    [SerializeField] private HoldItemIcon holdItemIcon;
     private AudioManager audioManager;
 
 
     // SCENE REFERENCE:
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private GameObject controlsScreen;
 
     // CONSTANT:
     private readonly float defaultGravityScale = 3.5f;
@@ -68,6 +70,9 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            controlsScreen.SetActive(!controlsScreen.activeSelf);
+
         animator.SetBool("isRun", isRun);
         animator.SetBool("itemCarry", itemCarry);
         animator.SetBool("hasJump", hasJump);
@@ -276,11 +281,14 @@ public class Player : MonoBehaviour
         closestItemInRange.Pickup();
         audioManager.PlaySFX(audioManager.pickupClip);
 
+        holdItemIcon.ToggleIcon(true, closestItemInRange);
     }
     private void DropItem()
     {
         heldItem.Drop(this, facingLeft);
         audioManager.PlaySFX(audioManager.throwClip);
+        holdItemIcon.ToggleIcon(false, null);
+
         heldItem = null;
     }
 

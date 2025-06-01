@@ -63,3 +63,6 @@ TagManager:
   - name: InteractIcons
     uniqueID: 890661645
     locked: 0
+  - name: HeldIcons
+    uniqueID: 3970470051
+    locked: 0
