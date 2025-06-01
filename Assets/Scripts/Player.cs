@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
 
     // SCENE REFERENCE:
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private GameObject titleScreen;
+    [SerializeField] private GameObject listScreen;
     [SerializeField] private GameObject controlsScreen;
     [SerializeField] private GameObject winScreen;
 
@@ -74,7 +76,7 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!titleScreen.activeSelf && !listScreen.activeSelf && !winScreen.activeSelf && Input.GetKeyDown(KeyCode.Escape))
             controlsScreen.SetActive(!controlsScreen.activeSelf);
 
         animator.SetBool("isRun", isRun);
@@ -294,6 +296,8 @@ public class Player : MonoBehaviour
         audioManager.PlaySFX(audioManager.pickupClip);
 
         holdItemIcon.ToggleIcon(true, closestItemInRange);
+
+        unlockedItems.Add(heldItem);
     }
     private void DropItem()
     {
@@ -329,12 +333,17 @@ public class Player : MonoBehaviour
             heldItem = newItem;
             holdItemIcon.ToggleIcon(true, newItem);
             itemsHeldByNPCs--;
+
+            unlockedItems.Add(heldItem);
         }
         else
         {
+            unlockedItems.Remove(heldItem);
+
             heldItem = null;
             holdItemIcon.ToggleIcon(false, null);
             itemsHeldByNPCs++;
+
             if (itemsHeldByNPCs == 8)
                 winScreen.SetActive(true);
         }
@@ -499,5 +508,29 @@ public class Player : MonoBehaviour
 
             transform.position += playerOffset;
         }
+    }
+
+
+
+
+
+    private readonly List<Item> unlockedItems = new();
+    public void PressButton()
+    {
+        foreach (Item item in unlockedItems)
+            item.transform.position = transform.position + (Vector3.up * 3);
+    }
+
+
+
+    public void TitleScreenButton()
+    {
+        titleScreen.SetActive(false);
+        listScreen.SetActive(true);
+    }
+    public void ListScreenButton()
+    {
+        listScreen.SetActive(false);
+        controlsScreen.SetActive(true);
     }
 }
