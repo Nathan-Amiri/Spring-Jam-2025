@@ -13,6 +13,8 @@ public class HoldItemIcon : MonoBehaviour
     public void ToggleIcon(bool on, Item item)
     {
         iconSR.enabled = on;
+        iconSR.flipX = false;
+        iconSR.flipY = false;
 
         if (!on)
             return;
@@ -35,6 +37,8 @@ public class HoldItemIcon : MonoBehaviour
                 iconSR.sprite = icons[2];
                 transform.localPosition = new Vector2(0, 1.7f);
                 transform.localScale = new Vector2(.8f, .8f);
+                iconSR.flipX = true;
+                iconSR.flipY = true;
                 break;
 
             case "Corn Dog":

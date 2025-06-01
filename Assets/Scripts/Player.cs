@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
 
     // CONSTANT:
     private readonly float defaultGravityScale = 3.5f;
-    private readonly float moveSpeed = 8;
+    private readonly float moveSpeed = 12;
     private readonly float jumpForce = 15;
     private readonly float fallMultiplier = 3; // Fastfall
     private readonly float lowJumpMultiplier = 10; // Dynamic jump
