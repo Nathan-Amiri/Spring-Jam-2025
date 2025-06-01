@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private int itemsHeldByNPCs;
+
     // PREFAB REFERENCE:
     public Rigidbody2D rb; // Read by Item (Mushroom)
     [SerializeField] private List<Collider2D> myCols = new();
@@ -17,6 +19,7 @@ public class Player : MonoBehaviour
     // SCENE REFERENCE:
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject controlsScreen;
+    [SerializeField] private GameObject winScreen;
 
     // CONSTANT:
     private readonly float defaultGravityScale = 3.5f;
@@ -47,7 +50,7 @@ public class Player : MonoBehaviour
 
     private readonly List<Item> itemsInPickupRange = new();
     private bool itemPickupInput;
-    private Item heldItem;
+    [NonSerialized] public Item heldItem; // Read by NPCInteraction
 
     private bool dynamicJumpOff;
 
@@ -310,7 +313,23 @@ public class Player : MonoBehaviour
         }
     }
 
-
+    public void ExchangeItem(bool gainItem, Item newItem)
+    {
+        if (gainItem)
+        {
+            heldItem = newItem;
+            holdItemIcon.ToggleIcon(true, newItem);
+            itemsHeldByNPCs--;
+        }
+        else
+        {
+            heldItem = null;
+            holdItemIcon.ToggleIcon(false, null);
+            itemsHeldByNPCs++;
+            if (itemsHeldByNPCs == 8)
+                winScreen.SetActive(true);
+        }
+    }
 
 
 

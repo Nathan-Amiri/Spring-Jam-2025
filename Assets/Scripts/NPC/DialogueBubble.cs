@@ -47,7 +47,7 @@ public class DialogueBubble : MonoBehaviour
 
             for (int i = 0; i < line.Length; i++)
             {
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.P))
                 {
                     skipping = true;
                     break;
@@ -71,7 +71,7 @@ public class DialogueBubble : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
             }
 
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.P));
         }
 
         if (onDialogueComplete != null)
