@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour
     private bool jumpInputDown;
     private bool jumpInput;
 
-    private bool isStunned;
+    private bool isStunned = true;
 
         // Animator:
     [NonSerialized] public bool isWarp;
@@ -525,12 +526,18 @@ public class Player : MonoBehaviour
 
     public void TitleScreenButton()
     {
-        titleScreen.SetActive(false);
         listScreen.SetActive(true);
     }
     public void ListScreenButton()
     {
+        titleScreen.SetActive(false);
         listScreen.SetActive(false);
         controlsScreen.SetActive(true);
+        isStunned = false;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
     }
 }
