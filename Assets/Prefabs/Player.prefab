@@ -200,7 +200,7 @@ MonoBehaviour:
   itemCarry: 0
   tetherRenderer: {fileID: 8512042308058919639}
   anchorRB: {fileID: 6090089640566269478}
-  anchorFixedJoint: {fileID: 0}
+  anchorFixedJoint: {fileID: 4552307877146074887}
   movingPlatformAnchor: {fileID: 3514149762836824260}
 --- !u!50 &6443120910450712982
 Rigidbody2D:
@@ -816,11 +816,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 23389461716698390, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
       propertyPath: m_Size.x
-      value: 1.125
+      value: 1.5875
       objectReference: {fileID: 0}
     - target: {fileID: 23389461716698390, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
       propertyPath: m_Size.y
-      value: 4.1875
+      value: 1.5125
+      objectReference: {fileID: 0}
+    - target: {fileID: 23389461716698390, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2110888274, guid: b233bd4a6e4de1f4899ac130bf6a1a1c, type: 3}
+    - target: {fileID: 23389461716698390, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
+      propertyPath: m_Color.b
+      value: 0.54901963
+      objectReference: {fileID: 0}
+    - target: {fileID: 23389461716698390, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
+      propertyPath: m_Color.g
+      value: 0.54901963
+      objectReference: {fileID: 0}
+    - target: {fileID: 23389461716698390, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
+      propertyPath: m_Color.r
+      value: 0.54901963
+      objectReference: {fileID: 0}
+    - target: {fileID: 23389461716698390, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23389461716698390, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
       propertyPath: m_SortingLayer
@@ -829,6 +849,10 @@ PrefabInstance:
     - target: {fileID: 23389461716698390, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
       propertyPath: m_SortingLayerID
       value: -1226536429
+      objectReference: {fileID: 0}
+    - target: {fileID: 23389461716698390, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4144450558487534669, guid: 74e0fc352df47244294ae2a9e0f44bf8, type: 3}
       propertyPath: m_LocalPosition.x
