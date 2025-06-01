@@ -58,7 +58,7 @@ public class NPCInteraction : MonoBehaviour
                 else
                     Debug.LogError("Whoops, Nathan must've forgot something!");
 
-                Vector3 spawnPos = transform.position + Vector3.up * 5f;
+                Vector3 spawnPos = transform.position + Vector3.up * 3.5f + Vector3.right * 3.5f;
                 activeBubble = Instantiate(speechBubblePrefab, spawnPos, Quaternion.identity);
                 activeBubble.transform.SetParent(transform);
 
