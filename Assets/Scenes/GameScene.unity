@@ -2416,7 +2416,7 @@ PrefabInstance:
     - target: {fileID: 6805295355279893049, guid: 0e85e04f58ccb69498fa83c448bc24dd, type: 3}
       propertyPath: anchorFixedJoint
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2105499532}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5857,6 +5857,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8519868850827567695, guid: 7164556812539fb41952a9b2c5c3034a, type: 3}
   m_PrefabInstance: {fileID: 2104270987}
+  m_PrefabAsset: {fileID: 0}
+--- !u!255 &2105499532 stripped
+FixedJoint2D:
+  m_CorrespondingSourceObject: {fileID: 4552307877146074887, guid: 0e85e04f58ccb69498fa83c448bc24dd, type: 3}
+  m_PrefabInstance: {fileID: 901035241}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2110312229
 PrefabInstance:
