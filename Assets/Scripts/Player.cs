@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
 
     // CONSTANT:
     private readonly float defaultGravityScale = 3.5f;
-    private readonly float holdingItemGravityScale = 5;
     private readonly float moveSpeed = 8;
     private readonly float jumpForce = 15;
     private readonly float fallMultiplier = 3; // Fastfall
@@ -69,18 +68,17 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        animator.SetBool("itemCarry", itemCarry);
+        animator.SetBool("hasJump", hasJump);
+        animator.SetBool("isWarp", isWarp);
+
         isRun = !isStunned && moveInput != 0;
 
         sr.flipX = facingLeft;
         itemCarry = heldItem != null;
         SpaghettiUpdate();
 
-        if (isStunned)
-            rb.gravityScale = 0;
-        else if (heldItem != null)
-            rb.gravityScale = holdingItemGravityScale;
-        else
-            rb.gravityScale = defaultGravityScale;
+        rb.gravityScale = isStunned ? 0 : defaultGravityScale;
 
         if (transform.position.y < deathY)
         {
