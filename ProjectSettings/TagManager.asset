@@ -45,6 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: CanLid
+    uniqueID: 502262965
+    locked: 0
   - name: Items
     uniqueID: 1615264017
     locked: 0
