@@ -192,9 +192,12 @@ MonoBehaviour:
   - {fileID: 6797862149439481072}
   - {fileID: 2595988071239747154}
   sr: {fileID: 4280164112404299728}
+  triggerSR: {fileID: 3958893347192684473}
   footstepSource: {fileID: 6766490117045130419}
   holdItemIcon: {fileID: 5389062375525457447}
   mainCamera: {fileID: 0}
+  titleScreen: {fileID: 0}
+  listScreen: {fileID: 0}
   controlsScreen: {fileID: 0}
   winScreen: {fileID: 0}
   itemCarry: 0
@@ -720,7 +723,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.42830187, g: 0.4462375, b: 1, a: 0.19215687}
+  m_Color: {r: 0.42830187, g: 0.4462375, b: 1, a: 0.14901961}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -759,7 +762,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
