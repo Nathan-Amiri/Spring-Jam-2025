@@ -409,7 +409,8 @@ MonoBehaviour:
   - Lets see...
   - What do I want to eat?
   - What are rabbits famous for eating, again?
-  - Oh right...canned corn!
+  - Oh right...
+  - Canned Corn!
 --- !u!95 &2007349567097935262
 Animator:
   serializedVersion: 5
