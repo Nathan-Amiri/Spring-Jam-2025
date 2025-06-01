@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public Rigidbody2D rb; // Read by Item (Mushroom)
     [SerializeField] private List<Collider2D> myCols = new();
     [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private SpriteRenderer triggerSR;
     [SerializeField] private AudioSource footstepSource;
     [SerializeField] private HoldItemIcon holdItemIcon;
     private AudioManager audioManager;
@@ -103,7 +104,7 @@ public class Player : MonoBehaviour
         if (isStunned)
             return;
 
-
+        triggerSR.enabled = Input.GetKey(KeyCode.O);
 
         if (isGrounded)
             lastGroundedPosition = transform.position + new Vector3(0, .5f);
