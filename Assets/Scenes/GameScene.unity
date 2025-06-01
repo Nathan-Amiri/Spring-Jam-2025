@@ -4052,9 +4052,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 202511052}
     - target: {fileID: 6805295355279893049, guid: 0e85e04f58ccb69498fa83c448bc24dd, type: 3}
+      propertyPath: winScreen
+      value: 
+      objectReference: {fileID: 1747295694}
+    - target: {fileID: 6805295355279893049, guid: 0e85e04f58ccb69498fa83c448bc24dd, type: 3}
+      propertyPath: listScreen
+      value: 
+      objectReference: {fileID: 1747295694}
+    - target: {fileID: 6805295355279893049, guid: 0e85e04f58ccb69498fa83c448bc24dd, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1428488994}
+    - target: {fileID: 6805295355279893049, guid: 0e85e04f58ccb69498fa83c448bc24dd, type: 3}
+      propertyPath: titleScreen
+      value: 
+      objectReference: {fileID: 1747295694}
+    - target: {fileID: 6805295355279893049, guid: 0e85e04f58ccb69498fa83c448bc24dd, type: 3}
+      propertyPath: controlsScreen
+      value: 
+      objectReference: {fileID: 1747295694}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
