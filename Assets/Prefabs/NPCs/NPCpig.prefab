@@ -364,11 +364,17 @@ MonoBehaviour:
   speechBubblePrefab: {fileID: 1438251686103825189, guid: 69be8c5813e580c4399ff3028b7e5405, type: 3}
   holdItemIcon: {fileID: 728127524903328147}
   talkIcon: {fileID: 1641444360313979490}
-  bothEmptyDialogueLines: []
-  npcItemDialogueLines: []
+  bothEmptyDialogueLines:
+  - 'I would kill for some spaghetti right now, haha! '
+  - ...
+  - 'Seriously. '
+  npcItemDialogueLines:
+  - Do you need this back?
+  - Okay...but nothing better happen to it...
   wrongItemDialogueLines:
   - That item doesn't look quite right.
-  rightItemDialogueLines: []
+  rightItemDialogueLines:
+  - Oh, how scrumptious!
   bothFullDialogueLines:
   - It seems like your hands are full.
   - "Come back when you aren\u2019t holding anything."

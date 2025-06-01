@@ -494,11 +494,21 @@ MonoBehaviour:
   speechBubblePrefab: {fileID: 1438251686103825189, guid: b2be4a857d691af40babd1e2700d2e47, type: 3}
   holdItemIcon: {fileID: 586252181356940908}
   talkIcon: {fileID: 4188499732231110840}
-  bothEmptyDialogueLines: []
-  npcItemDialogueLines: []
+  bothEmptyDialogueLines:
+  - 'Lets see... '
+  - 'What do I want to eat? '
+  - 'What are rabbits famous for eating, again? '
+  - 'Oh right... '
+  - 'Canned Corn! '
+  npcItemDialogueLines:
+  - 'Oh do you need this? '
+  - You can have it back for now. I can wait.
   wrongItemDialogueLines:
   - That item doesn't look quite right.
-  rightItemDialogueLines: []
+  rightItemDialogueLines:
+  - What a rootin, tootin delight!
+  - Oh wait, I forgot I don't have a can opener.
+  - Hmm.
   bothFullDialogueLines:
   - It seems like your hands are full.
   - "Come back when you aren\u2019t holding anything."

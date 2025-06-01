@@ -152,13 +152,20 @@ MonoBehaviour:
   speechBubblePrefab: {fileID: 1438251686103825189, guid: 8a9b6b8991453334e9ccac08a9c770b9, type: 3}
   holdItemIcon: {fileID: 7508827174837611309}
   talkIcon: {fileID: 4694331589257189766}
-  bothEmptyDialogueLines: []
-  npcItemDialogueLines: []
+  bothEmptyDialogueLines:
+  - 'Ssss...everyone knows that snakes only eat long foods. '
+  - 'See if you can find one that''s "sticky." '
+  - 'Heh heh heh... '
+  - Heh.
+  npcItemDialogueLines:
+  - 'Ssss...Oh do you need this? '
+  - You can have it back for now. I can wait.
   wrongItemDialogueLines:
-  - That item doesn't look quite right.
-  rightItemDialogueLines: []
+  - Ssss...That item doesn't look quite right.
+  rightItemDialogueLines:
+  - Ssss...Ah, corndog my sweet. We're together at last.
   bothFullDialogueLines:
-  - It seems like your hands are full.
+  - Ssss...It seems like your hands are full.
   - "Come back when you aren\u2019t holding anything."
   player: {fileID: 0}
 --- !u!95 &1778713783961946258

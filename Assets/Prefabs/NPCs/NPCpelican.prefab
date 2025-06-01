@@ -410,14 +410,22 @@ MonoBehaviour:
   speechBubblePrefab: {fileID: 1438251686103825189, guid: 005053b31045e0f48b3b0f201872599a, type: 3}
   holdItemIcon: {fileID: 8720513463720516657}
   talkIcon: {fileID: 6280243707983816342}
-  bothEmptyDialogueLines: []
-  npcItemDialogueLines: []
+  bothEmptyDialogueLines:
+  - 'I... '
+  - 'WANT... '
+  - 'SPINACH!!! '
+  npcItemDialogueLines:
+  - YOU CAN HAVE THIS BACK...
+  - BUT PLEASE RETURN.
   wrongItemDialogueLines:
-  - That item doesn't look quite right.
-  rightItemDialogueLines: []
+  - NOT SPINACH???
+  - NO THANKS.
+  rightItemDialogueLines:
+  - SPINACH!!!
+  - WOOOO!!
   bothFullDialogueLines:
-  - It seems like your hands are full.
-  - "Come back when you aren\u2019t holding anything."
+  - HANDS ARE TOO FULL.
+  - NOWHERE TO PUT SPINACH...
   player: {fileID: 0}
 --- !u!95 &2155363091386277052
 Animator:

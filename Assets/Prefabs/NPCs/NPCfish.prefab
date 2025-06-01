@@ -494,14 +494,18 @@ MonoBehaviour:
   speechBubblePrefab: {fileID: 1438251686103825189, guid: c443a711201380349a3f4c43737aab95, type: 3}
   holdItemIcon: {fileID: 1706939169088539251}
   talkIcon: {fileID: 1342941785052479996}
-  bothEmptyDialogueLines: []
-  npcItemDialogueLines: []
+  bothEmptyDialogueLines:
+  - 'BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB... '
+  - 'BLUB BLUB BLUB broccoli BLUB BLUB BLUB BLUB BLUB... '
+  - 'BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB... '
+  npcItemDialogueLines:
+  - BLUB BLUB BLUB? BLUB BLUB.
   wrongItemDialogueLines:
-  - That item doesn't look quite right.
-  rightItemDialogueLines: []
+  - BLUB BLUB BLUB BLUB??!!
+  rightItemDialogueLines:
+  - BLUB BLUB BLUB :)
   bothFullDialogueLines:
-  - It seems like your hands are full.
-  - "Come back when you aren\u2019t holding anything."
+  - BLUB...
   player: {fileID: 0}
 --- !u!95 &4658340607144630854
 Animator:

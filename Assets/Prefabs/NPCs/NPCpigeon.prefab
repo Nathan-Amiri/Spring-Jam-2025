@@ -410,11 +410,18 @@ MonoBehaviour:
   speechBubblePrefab: {fileID: 1438251686103825189, guid: d1a765207d7c6fc42a76a91d03c9de31, type: 3}
   holdItemIcon: {fileID: 394410468699097739}
   talkIcon: {fileID: 600757729748624483}
-  bothEmptyDialogueLines: []
-  npcItemDialogueLines: []
+  bothEmptyDialogueLines:
+  - That mushroom over there looks really tasty.
+  - It looks like you need it though...
+  - No rush!
+  - Let me know when I can have it.
+  npcItemDialogueLines:
+  - 'Oh do you need this? '
+  - You can have it back for now. I can wait.
   wrongItemDialogueLines:
   - That item doesn't look quite right.
-  rightItemDialogueLines: []
+  rightItemDialogueLines:
+  - Perfect! Just what I was looking for.
   bothFullDialogueLines:
   - It seems like your hands are full.
   - "Come back when you aren\u2019t holding anything."

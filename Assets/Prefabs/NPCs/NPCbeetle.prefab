@@ -236,11 +236,20 @@ MonoBehaviour:
   speechBubblePrefab: {fileID: 1438251686103825189, guid: 524d26d189055d84788db3339c01cc20, type: 3}
   holdItemIcon: {fileID: 0}
   talkIcon: {fileID: 9189701997560608403}
-  bothEmptyDialogueLines: []
-  npcItemDialogueLines: []
-  wrongItemDialogueLines: []
-  rightItemDialogueLines: []
-  bothFullDialogueLines: []
+  bothEmptyDialogueLines:
+  - 'If you see any carrots, can you let me know? '
+  - 'I''ve got to maintain my color somehow! '
+  npcItemDialogueLines:
+  - Oh do you need this?
+  - You can have it back for now. I can wait.
+  wrongItemDialogueLines:
+  - I'm not sure what I'm looking at here...
+  rightItemDialogueLines:
+  - 'Oh that''s the one! '
+  - Mmm delicious carotene.
+  bothFullDialogueLines:
+  - It seems like your hands are full.
+  - "Come back when you aren\u2019t holding anything."
   player: {fileID: 0}
 --- !u!95 &7421360199212234797
 Animator:

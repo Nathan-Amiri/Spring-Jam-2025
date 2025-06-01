@@ -280,11 +280,17 @@ MonoBehaviour:
   speechBubblePrefab: {fileID: 1438251686103825189, guid: 8b5a87b19684b3f4b9fe9296a5d5b852, type: 3}
   holdItemIcon: {fileID: 7293058228068633216}
   talkIcon: {fileID: 3414234703091070585}
-  bothEmptyDialogueLines: []
-  npcItemDialogueLines: []
+  bothEmptyDialogueLines:
+  - 'This place is all loosey goosey. '
+  - 'Be a dear and fetch me something sweet. '
+  - 'Pretty please? '
+  npcItemDialogueLines:
+  - 'Oh do you need this? '
+  - You can have it back for now. I can wait.
   wrongItemDialogueLines:
   - That item doesn't look quite right.
-  rightItemDialogueLines: []
+  rightItemDialogueLines:
+  - Oh splendid! This is perfect.
   bothFullDialogueLines:
   - It seems like your hands are full.
   - "Come back when you aren\u2019t holding anything."
